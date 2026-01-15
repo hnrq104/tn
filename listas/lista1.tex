@@ -148,8 +148,8 @@
     \begin{enumerate}
         \item Se $a \equiv b \mod n$ então $\big(\frac{a}{n}\big) = \big(\frac{b}{n}\big)$.
         \item $\big(\frac{a}{n}\big) = 0$ se $\gcd(a,n) \neq 1$ e $\big(\frac{a}{p}\big) \in \{-1,1\}$ se $\gcd(a,n) = 1$.
-        \item $\big(\frac{ab}{n}\big) = \big(\frac{a}{n}\big)\big(\frac{b}{n}\big)$; em particular, $\big(\frac{a^2}{n}\big) \in {0,1}$.
-        \item $\big(\frac{a}{mn}\big) = \big(\frac{a}{n}\big)\big(\frac{a}{m}\big)$; em particular, $\big(\frac{a}{n^2}\big) \in {0,1}$.
+        \item $\big(\frac{ab}{n}\big) = \big(\frac{a}{n}\big)\big(\frac{b}{n}\big)$; em particular, $\big(\frac{a^2}{n}\big) \in \{0,1\}$.
+        \item $\big(\frac{a}{mn}\big) = \big(\frac{a}{n}\big)\big(\frac{a}{m}\big)$; em particular, $\big(\frac{a}{n^2}\big) \in \{0,1\}$.
         \item Se $m$ e $n$ são positivos e ímpares, então $\big(\frac{m}{n}\big) = (-1)^{(m-1)/2 \cdot (n-1)/2} \big(\frac{n}{m}\big)$.
         \item $\big(\frac{-1}{n}\big) = (-1)^{(n-1)/2}$.
         \item $\big(\frac{2}{n}\big) = (-1)^{(n^2 - 1)/8}$ se $n$ é ímpar.
@@ -158,5 +158,107 @@
 
 
 \begin{proof}
-    
+\textbf{(1)} Note que se $a \equiv b \pmod n$, então $a \equiv b \pmod{p_j}$ para todo $1 \leq j \leq k$. Pela propriedade usual do símbolo de Legendre,
+$\big( \frac{a}{p_j} \big) = \big( \frac{b}{p_j}\big)$ para todo $j$ e, portanto,
+\[
+    \bigg(\frac{a}{n}\bigg) = \prod_{j=1}^{r}\bigg( \frac{a}{p_j} \bigg)^{\alpha_j} = \prod_{j=1}^{r}\bigg( \frac{b}{p_j} \bigg)^{\alpha_j} = \bigg(\frac{b}{n}\bigg).
+\]
+
+\textbf{(2)} Se $(a,n) \neq 1$, então existe algum primo $p_i$ tal que $p_i \mid a$, portanto $\big(\frac{a}{p_i}\big) = 0$ e 
+\[ \prod_{j=1}^{r}\bigg( \frac{a}{p_j} \bigg)^{\alpha_j} = 0.\]
+Por outro lado, se $(a,n) = 1$, então para todos os primos $p_i$, temos que $p_i \nmid a$ e temos $\big(\frac{a}{p_i}\big) \in \{-1,1\}$. Portanto
+\[
+    \prod_{j=1}^{r}\bigg( \frac{a}{p_j} \bigg)^{\alpha_j} \in \{-1,1\}.
+\]
+
+\textbf{(3)}
+Basta abrir a conta e usar a propriedade dos símbolos usuais de Legendre,
+\[
+\bigg(\frac{ab}{n}\bigg) = \prod_{j=1}^{r}\bigg( \frac{ab}{p_j} \bigg)^{\alpha_j} = \prod_{j=1}^{r}\bigg( \frac{a}{p_j} \bigg)^{\alpha_j}\bigg( \frac{b}{p_j} \bigg)^{\alpha_j} =
+\prod_{j=1}^{r}\bigg( \frac{a}{p_j} \bigg)^{\alpha_j} \prod_{j=1}^{r} \bigg( \frac{b}{p_j} \bigg)^{\alpha_j} =  
+\bigg(\frac{a}{n}\bigg)\bigg(\frac{b}{n}\bigg).
+\]
+
+\textbf{(4)} Sejam $q_1 \dots q_r$ os primos que dividem $n$ ou $m$. Escrevemos $n = q_1^{\alpha_1}\dots q_r^{\alpha_r}$ e $m = q_1^{\beta_1} \dots q_r^{\beta_r}$
+onde os $\alpha_i$ e $\beta_j$ podem potencialmente ser $0$. Temos
+$$nm = q_1^{\alpha_1 + \beta_1}\dots q_r^{\alpha_r + \beta_r}$$
+e logo
+$$\bigg( \frac{a}{nm} \bigg) = \prod_{j = 1}^{r} \bigg(\frac{a}{q_j}\bigg)^{\alpha_j + \beta_j} = \prod_{j = 1}^{r} \bigg(\frac{a}{q_j}\bigg)^{\alpha_j} \prod_{j = 1}^{r} \bigg(\frac{a}{q_j}\bigg)^{\beta_j}.$$
+Agora notamos que se $q_j \nmid n$, então $\alpha_j = 0$ e  se $q_i \nmid m$, então $\beta_i = 0$, então os produtórios acima se expressam como
+\[
+    \bigg( \frac{a}{nm} \bigg) =  \prod_{q_j \mid n} \bigg(\frac{a}{q_j}\bigg)^{\alpha_j} \prod_{q_i \mid m} \bigg(\frac{a}{q_i}\bigg)^{\beta_i} = \bigg(\frac{a}{n}\bigg) \bigg(\frac{a}{m}\bigg).
+\]
+
+\textbf{(5)} Esse é mais interessante, vamos usar reciprocidade quadrática e as propriedades anteriores. Primeiramente, note que por \textbf{(2)}, a fórmula é válida se $(m,n) \neq 1$,
+já que tanto $\big(\frac{m}{n}\big) = 0$ quanto $\big(\frac{n}{m}\big) = 0$. Podemos supor então que $(m,n) = 1$. Outro caso de interesse é que se $a^2 \mid m$, então $m = a^2m'$ e por \textbf{(3)},
+$\big(\frac{m}{n}\big) = \big(\frac{m'}{n}\big)$. Já que o mesmo vale para o "denominador" do símbolo de Legendre, podemos supor ainda mais que $m$ e $n$ são livres de quadrados. Ou seja, podemos considerar (ad hoc) que suas fatorações 
+são $n = p_1\dots p_l \cdot r_1 \dots r_k $ e $m = q_1 \dots q_t \cdot s_1 \dots s_h$ onde os $p_i \equiv q_j \equiv 1 \pmod 4$, os $r_i \equiv s_j \equiv 3 \pmod 4$ e os primos das fatorações são todos distintos.
+
+Após todas nossas suposições, temos (usando a propriedade \textbf{(3)} e \textbf{(4)}  várias vezes)
+\[
+    \bigg(\frac{m}{n}\bigg) = \bigg(\frac{q_1 \dots q_t \cdot s_1 \dots s_h}{p_1\dots p_l \cdot r_1 \dots r_k}\bigg)
+    = \bigg(\frac{q_1 \dots q_t}{p_1\dots p_l}\bigg)\bigg(\frac{s_1 \dots s_h}{p_1\dots p_l}\bigg) \bigg(\frac{q_1 \dots q_t}{r_1 \dots r_k}\bigg)\bigg(\frac{s_1 \dots s_h}{r_1 \dots r_k}\bigg),
+\]
+ou seja,
+\[
+    \bigg(\frac{m}{n}\bigg) = \prod_{(q_i,p_j)} \bigg(\frac{q_i}{p_j}\bigg) \cdot \prod_{(s_i,p_j)} \bigg(\frac{s_i}{p_j}\bigg) \cdot \prod_{(q_i,r_j)} \bigg(\frac{q_i}{r_j}\bigg) \cdot \prod_{(s_i,r_j)} \bigg(\frac{s_i}{r_j}\bigg).
+\]
+Pela lei da reciprocidade quadrática, se $h$ é um primo com $h \equiv 1 \pmod 4$ e $g$ é outro primo qualquer, então $\big(\frac{h}{g}\big) = \big(\frac{g}{h}\big)$ e se ambos $g$ e $h$ forem congruentes a 3 módulo 4, então 
+$\big(\frac{h}{g}\big) = -\big(\frac{g}{h}\big)$. Podemos usar isso na expressão acima para obter
+\[
+    \bigg(\frac{m}{n}\bigg) = \prod_{(q_i,p_j)} \bigg(\frac{p_j}{q_i}\bigg) \cdot \prod_{(s_i,p_j)} \bigg(\frac{p_j}{s_i}\bigg) \cdot \prod_{(q_i,r_j)} \bigg(\frac{r_j}{q_i}\bigg) \prod_{(s_i,r_j)} - \bigg(\frac{r_j}{s_i}\bigg),
+\]
+de forma que (juntando os produtórios)
+\[
+    \bigg(\frac{m}{n}\bigg) = (-1)^{kh} \bigg(\frac{n}{m}\bigg).
+\]
+Para o resultado, basta mostrar que $kh \equiv (n-1)/2 \cdot (m-1)/2 \pmod 2$ (note que são inteiros uma vez que $n$ e $m$ são ímpares). Vamos olhar para $n$ e $m$ módulo 4, observamos que 
+\[
+    n \equiv p_1\dots p_l \cdot r_1 \dots r_k \equiv r_1 \dots r_k \equiv 3^k \equiv \begin{cases}
+        1 &\text{se } k \equiv 0 \mod 2\\
+        3 &\text{se } k \equiv 1 \mod 2
+    \end{cases}\bigg\} \pmod 4
+\]
+o resultado análogo segue para $m$ e $h$. Disso já obtemos que se $h$ ou $k$ forem pares, então $n$ ou $m$ são 1 módulo 4, portanto $(n-1)/2$ ou $(m-1)/2$ é par
+e $hk \equiv 0 \equiv (n-1)/2 \cdot (m-1)/2 \pmod 2$. Se ambos $h$ e $k$ forem ímpares, então $n \equiv m \equiv 3 \pmod 4$, logo $(n-1)/2$ e $(m-1)/2$ são ímpares
+e $hk \equiv 1 \equiv (n-1)/2 \cdot (m-1)/2 \pmod 2$ concluindo a demonstração.
+
+\textbf{(6)} Vamos fazer uma análise semelhante a \textbf{(5)}. Pelo observado anteriormente, podemos supor que $n$ é livre de quadrados e se escreve
+$n = p_1 \dots p_l \cdot r_1 \dots r_k$ com os $p_i \equiv 1 \pmod 4$ e $r_i \equiv 3 \pmod 4$. Abrindo o símbolo de Jacobi, temos então
+\[
+    \bigg(\frac{-1}{n}\bigg) = \prod_{p_i} \bigg(\frac{-1}{p_i}\bigg) \prod_{r_j} \bigg(\frac{-1}{r_j}\bigg).
+\]
+Como $\big(\frac{-1}{x}\big) = 1$ se $x$ é primo e $x \equiv 1 \pmod 4$ e $\big(\frac{-1}{x}\big) = -1$ se $x$ for um primo com $x \equiv 3 \pmod 4$, segue que 
+\[
+    \bigg(\frac{-1}{n}\bigg) = (-1)^{k}
+\] 
+ou seja, para mostrar a igualdade, basta veriricar que $k \equiv (n-1)/2 \pmod 2$ e já fizemos isso na prova da propriedade anterior.
+
+\textbf{(7)} Seguindo a mesma ideia, vamos fatorar $n$ de maneira esperta. Vimos que, sem perda de generalidade, podemos supor $n$ livre de quadrados, então escrevemos a fatoração prima de $n$ como
+\[
+    n = (p_1^+p_2^+\dots p_l^+) \cdot (p_1^-p_2^-\dots p_k^-) \cdot (q_1^+q_2^+\dots q_r^+) \cdot (q_1^-q_2^-\dots q_s^-)
+\]
+onde cada $p_i^+ \equiv 1 \pmod 8$, $p_i^- \equiv -1 \pmod 8$, $q_i^+ \equiv 3 \pmod 8$ e $q_i^- \equiv -3 \pmod 8$. Usando a propriedade \textbf{(4)}, temos 
+\[
+    \bigg(\frac{2}{n}\bigg) = \prod_{p_i^+} \bigg(\frac{2}{p_i^+}\bigg) \cdot \prod_{p_i^-} \bigg(\frac{2}{p_i^-}\bigg) \cdot \prod_{q_i^+} \bigg(\frac{2}{q_i^+}\bigg) \cdot \prod_{q_i^-} \bigg(\frac{2}{q_i^-}\bigg).
+\]
+Por reciprocidade quadrática, sabemos que para todo $i$ vale $\big(\frac{2}{p_i^+}\big) = \big(\frac{2}{p_i^-}\big) = 1$ e $\big(\frac{2}{q_i^+}\big) = \big(\frac{2}{q_i^-}\big) = -1$, portanto, a equação acima reduz-se para
+\[
+    \bigg(\frac{2}{n}\bigg) = (-1)^{r + s}.
+\]
+Para finalizar a demonstração, basta mostrar que $r+s \equiv (n^2-1)/8 \pmod 2$ ou, equivalentemente, desejamos mostrar 
+\[
+    r + s \equiv 0 \pmod 2 \iff n \equiv \{-1,1\} \pmod 8 \quad \text{e} \quad r + s \equiv 1 \pmod 2 \iff n \equiv \{-3,3\} \pmod 8.
+\]
+Notamos primeiramente que
+\[
+    n = (p_1^+p_2^+\dots p_l^+) \cdot (p_1^-p_2^-\dots p_k^-) \cdot (q_1^+q_2^+\dots q_r^+) \cdot (q_1^-q_2^-\dots q_s^-) \equiv (1)^l \cdot (-1)^k \cdot (3)^r \cdot (-3)^s \pmod 8,
+\]
+ou seja, $n \equiv \eps  \cdot (3)^r \cdot (-3)^s \pmod 8$ onde $\eps \in \{-1,1\}$. Agora para a análise de casos. Se $r + s$ for par, então ou $r$ e $s$ são pares 
+onde $n \equiv \eps  \cdot 1 \cdot 1 \in \{-1,1\} \pmod 8$ ou $r$ e $s$ são ímpares e temos $n \equiv \eps  \cdot 3 \cdot -3 \equiv -\eps \in \{-1,1\} \pmod 8$. Se, por outro lado,
+$r + s$ for ímpar, então ou $r$ é ímpar e $s$ é par onde $n \equiv \eps \cdot 3 \cdot 1 \in \{3,-3\} \pmod 8$ ou $r$ é par e $s$ é ímpar, onde também temos $n \equiv \eps \cdot 1 \cdot -3 \in \{3,-3\} \pmod 8$. O que 
+conclui a demonstração.
+
+
+
 \end{proof}
