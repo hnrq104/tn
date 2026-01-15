@@ -6,6 +6,43 @@
     maior número inteiro que não pode expressar-se na forma $xbc + yca + zab$ com $x,y$ e $z$ inteiros não negativos.
 \end{problem}
 
+\begin{proof}
+    Note que como $(b,c) = 1$, temos que $(ab,ac) = a$ e, portanto por Bachét-Bezout existe solução
+    para $z'ab + y'ca = a$ com $z',y'$ inteiros. Por sua vez, como $(a,bc) = 1$, existe solução para 
+    $ma + nbc = 1$ com $m,n$ inteiros. Juntando as duas equações, encontramos $mz'ab + my'ca + nbc = 1$ que é solução para 
+    a equação $xbc + yca + zab = 1$ e, portanto, temos soluções para $xbc + yca + zab = k$ para qualquer inteiro $k$.
+
+    Vamos mostrar que $2abc - ab - bc -ca$ não pode ser escrito como $xbc + yca + zab$ para $x,y,z \in \N$. Suponha, que conseguimos,
+    temos 
+    \begin{align*}
+        2abc - ab - bc -ca = xbc + yca + zab\\
+        2abc = (x+1)bc + (y+1)ca + (z+1)ab 
+    \end{align*}
+    tomando a segunda equação módulo $a$, achamos
+    \[
+        0 \equiv (x+1)bc \pmod a \Rightarrow x+1 \equiv 0 \pmod a
+    \]
+    ou seja, $a \mid (x+1)$. Como $x \geq 0$, devemos ter $(x+1) \geq a$. Simetricamente (tomando módulo $b$ e depois $c$), sabemos que $(y+1) \geq b$ e $(z+1) \geq c$.
+    Mas já encontramos contradição, uma vez que essas desigualdades implicam
+    \[
+    (x+1)bc + (y+1)ca +(z+1)ab \geq abc + bca + cab = 3abc > 2abc
+    \]
+
+    Agora seja $n > 2abc - bc - ac - ab$, mostraremos que existe solução natural para $n = xbc + yac + zab$. Primeiro, vamos
+    caracterizar as soluções inteiras, que existem pela observação anterior. Note que se $(x,y,z)$ e $(x',y',z')$ são soluções,
+    então
+    \begin{equation}
+        \label{lista1:eq:prob1}
+        (x-x')bc + (y-y')ac + (z-z')ab = 0
+    \end{equation}
+    tomando a equação módulo $a$, vemos que $(x-x') \equiv 0 \pmod a$ e portanto $x' = x + ra$ para algum $r \in \Z$. Simetricamente,
+    vemos que $y' = y + sb$ e $z' = z + tc$ para $s,t \in \Z$. Portanto, [\ref{lista1:eq:prob1}] se expressa como 
+    \[
+        (ra)bc + (sb)ac + (tc)ab = (r+s+t)abc = 0 \iff (r+s+t) = 0 
+    \]
+    
+
+\end{proof}
 
 \begin{problem}
     Seja $p$ um número primo ímpar. Seja $s$ o menor inteiro positivo que não é resíduo quadrático módulo $p$.
@@ -14,6 +51,12 @@
         \item Suponha que $p > 5$ e que $-1$ seja resíduo quadrático módulo $p$: mostre que $p>2s^2 - s$.
     \end{enumerate}
 \end{problem}
+
+
+\begin{proof}
+    
+\end{proof}
+
 
 \begin{problem}
     Seja $p$ um primo ímpar, $a$ um inteiro e $n$ um inteiro positivo. Sejam $\alpha$ e $\beta$ inteiros negativos, com $\alpha > 0$. Prove:
@@ -25,6 +68,12 @@
     \end{enumerate}
 \end{problem}
 
+
+\begin{proof}
+    
+\end{proof}
+
+
 \begin{problem}
     \begin{enumerate}[label=(\alph*)]
         \item Prove que $\text{ord}_{2^k} 5 = 2^{k-2}$, para todo $k \geq 2$.
@@ -33,9 +82,18 @@
     \end{enumerate}
 \end{problem}
 
+\begin{proof}
+    
+\end{proof}
+
 \begin{problem}
     Qual é o menor natural $n$ para o qual existe $k$ natural de modo que os 2026 últimos dígitos na representação decimal de $n^k$ são iguais a $1$?
 \end{problem}
+
+
+\begin{proof}
+    
+\end{proof}
 
 \begin{problem}
     O símbolo de Legendre $\big(\frac{a}{p}\big)$ pode ser estendido para o símbolo de Jacobi $\big(\frac{a}{n}\big)$, que está definido para $a$ inteiro 
@@ -54,3 +112,8 @@
         \item $\big(\frac{2}{n}\big) = (-1)^{(n^2 - 1)/8}$ se $n$ é ímpar.
     \end{enumerate}
 \end{problem}
+
+
+\begin{proof}
+    
+\end{proof}
