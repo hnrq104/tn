@@ -40,7 +40,50 @@
     \[
         (ra)bc + (sb)ac + (tc)ab = (r+s+t)abc = 0 \iff (r+s+t) = 0 
     \]
-    
+    Ou seja, se $(x_0, y_0, z_0)$ é uma solução inicial, todas as outras soluções são da forma $(x_0 + ra, y_0 + sb, z_0 + tc)$ onde 
+    $r + s + t = 0$, é fácil ver que qualquer qualquer tripla dessa forma também satisfaz a equação original. Nosso problema se resume então
+    a encontrar soluções inteiras $(r,s,t)$ para a seguinte série de relações:
+    \begin{align*}
+        x_0 + ra > -1\\
+        y_0 + sb > -1\\
+        z_0 + tc > -1\\
+        r + s + t = 0
+    \end{align*}
+    Isolando as variáveis e escrevendo $t$ como $-(r+s)$, temos
+    \begin{align*}
+        -\frac{(x_0+1)}{a} < r\\
+        -\frac{(y_0+1)}{b} < s\\
+        r+s < \frac{(z_0 + 1)}{c}
+    \end{align*}
+    As duas primeiras desigualdades, implicam que 
+    \[
+       - \bigg(\frac{(x_0+1)}{a} + \frac{(y_0+1)}{b}\bigg) < r+s < \frac{(z_0 + 1)}{c}
+    \]
+    Notamos (seguindo a resolução do livro para um problema similar) que 
+    \[
+        \frac{(z_0 + 1)}{c} - - \bigg(\frac{(x_0+1)}{a} + \frac{(y_0+1)}{b}\bigg) = \frac{(z_0 + 1)}{c} + \frac{(x_0+1)}{a} + \frac{(y_0+1)}{b} =
+        \frac{n + bc + ac + ab}{abc} > 2
+    \]
+    pois $n > 2abc - bc - ac - ab$. Segue que o intervalo $\bigg(- \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b}, \frac{(z_0 + 1)}{c}\bigg)$ tem ao menos dois inteiros.
+    Particularmente, os números %mais casos aqui
+    \[ 
+        \bigg\lceil - \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b} \bigg\rceil \quad \text{e} \quad \bigg\lceil - \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b} \bigg\rceil + 1
+    \]
+    pertencem ao intervalo. Tomando
+    \begin{align*}
+        r = \begin{cases}
+            \ceil{-(x_0+1)/a} & \text{se } -(x_0+1)/a \not\in \Z\\
+            \ceil{-(x_0+1)/a} + 1 & \text{se } -(x_0+1)/a \in \Z
+        \end{cases}
+    \end{align*}
+    e $s$ análoga, sendo 
+    \begin{align*}
+        s = \begin{cases}
+            \ceil{-(y_0+1)/b} & \text{se } -(y_0+1)/b \not\in \Z\\
+            \ceil{-(y_0+1)/b} + 1 & \text{se } -(y_0+1)/b \in \Z
+        \end{cases}
+    \end{align*}
+    achamos soluções $(r,s,t)$ compatíveis com o sistema de desigualdades.
 
 \end{proof}
 
