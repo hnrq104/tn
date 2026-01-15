@@ -1,2 +1,56 @@
 \pagebreak
 \section{Lista 1 - \date{12/1/2026}}
+
+\begin{problem}
+    Dados inteiros positivos $a, b$ e $c$, dois a dois primos entre si, demonstre que $2abc - ab - bc -ca$ é o 
+    maior número inteiro que não pode expressar-se na forma $xbc + yca + zab$ com $x,y$ e $z$ inteiros não negativos.
+\end{problem}
+
+
+\begin{problem}
+    Seja $p$ um número primo ímpar. Seja $s$ o menor inteiro positivo que não é resíduo quadrático módulo $p$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Mostre que $p > s^2 - s$.
+        \item Suponha que $p > 5$ e que $-1$ seja resíduo quadrático módulo $p$: mostre que $p>2s^2 - s$.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Seja $p$ um primo ímpar, $a$ um inteiro e $n$ um inteiro positivo. Sejam $\alpha$ e $\beta$ inteiros negativos, com $\alpha > 0$. Prove:
+    \begin{enumerate}[label=(\alph*)]
+        \item Se $p^\beta$ e $p^\alpha$ são as maiores potências de $p$ que dividem $n$ e $a-1$ respectivamente então $p^{\alpha + \beta}$ é 
+        a maior potência que divide $a^n - 1$.
+        \item Se $n$ é ímpar e $p^\beta$ e $p^\alpha$ são as maiores potências de $p$ que dividem $n$ e $a+1$ respectivamente então $p^{\alpha + \beta}$ é a maior potência
+        de $p$ que divide $a^n + 1$.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove que $\text{ord}_{2^k} 5 = 2^{k-2}$, para todo $k \geq 2$.
+        \item Prove que se $a$ é um inteiro ímpar e $k \geq 2$ então existem $\eps_j \in \{-1,1\}$ e $j \in \mathbb{Z}$ com $0 \leq j \leq 2^{k-2}$, únicamente determinados,
+        tais que $a \equiv \eps_j \cdot 5^j \mod 2^k$.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Qual é o menor natural $n$ para o qual existe $k$ natural de modo que os 2026 últimos dígitos na representação decimal de $n^k$ são iguais a $1$?
+\end{problem}
+
+\begin{problem}
+    O símbolo de Legendre $\big(\frac{a}{p}\big)$ pode ser estendido para o símbolo de Jacobi $\big(\frac{a}{n}\big)$, que está definido para $a$ inteiro 
+    arbitrário e $n$ inteiro positivo ímpar por $\big(\frac{a}{n}\big) = \big(\frac{a}{p_1}\big)^{\alpha_1} \dots \big(\frac{a}{p_k}\big)^{\alpha_k}$ se 
+    $n = p_1^{\alpha_1}\dots p_k^{\alpha_k}$ é a fatoração prima de $n$ (onde os $\big(\frac{a}{p_j}\big)$ são dados pelo símbolo de Legendre usual); temos 
+    $\big(\frac{a}{1}\big) = 1$ para todo inteiro $a$.
+
+    Prove as seguintes propriedades do símbolo de Jacobi, que podem ser usadas para calcular rapidametne símbolos de Legendre (e de Jacobi):
+    \begin{enumerate}
+        \item Se $a \equiv b \mod n$ então $\big(\frac{a}{n}\big) = \big(\frac{b}{n}\big)$.
+        \item $\big(\frac{a}{n}\big) = 0$ se $\gcd(a,n) \neq 1$ e $\big(\frac{a}{p}\big) \in \{-1,1\}$ se $\gcd(a,n) = 1$.
+        \item $\big(\frac{ab}{n}\big) = \big(\frac{a}{n}\big)\big(\frac{b}{n}\big)$; em particular, $\big(\frac{a^2}{n}\big) \in {0,1}$.
+        \item $\big(\frac{a}{mn}\big) = \big(\frac{a}{n}\big)\big(\frac{a}{m}\big)$; em particular, $\big(\frac{a}{n^2}\big) \in {0,1}$.
+        \item Se $m$ e $n$ são positivos e ímpares, então $\big(\frac{m}{n}\big) = (-1)^{(m-1)/2 \cdot (n-1)/2} \big(\frac{n}{m}\big)$.
+        \item $\big(\frac{-1}{n}\big) = (-1)^{(n-1)/2}$.
+        \item $\big(\frac{2}{n}\big) = (-1)^{(n^2 - 1)/8}$ se $n$ é ímpar.
+    \end{enumerate}
+\end{problem}
