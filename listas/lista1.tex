@@ -219,10 +219,26 @@ A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da
 
 \begin{proof}
     \textbf{(a)} Vamos provar por indução em $k$. O resultado é claro para $k = 2$ pois $5 \equiv 1 \pmod 4$. Suponha que vale para $k \geq 2$, vamos provar para $k+1$. Isto é,
-    queremos mostrar que $t = \text{ord}_{2^{k+1}} 5 = 2^{k-2}$, sabemos que 
+    queremos mostrar que $t = \text{ord}_{2^{k+1}} 5 = 2^{k-1}$, sabemos que 
     \[
-        \text{ord}_{2^k} 5 \mid t = \text{ord}_{2^{k+1}} 5 \mid \varphi(2^{k+1}) = 2^{k} \Rightarrow t \in \{2^{k-2}, 2^{k-1}, 2^{k}\}
+        \text{ord}_{2^k} 5 \mid t = \text{ord}_{2^{k+1}} 5 \mid \varphi(2^{k+1}) = 2^{k} \Rightarrow t \in \{2^{k-2}, 2^{k-1}, 2^{k}\}.
     \]
+    Como $5$ não é raiz primitiva módulo $4$, não pode ser raiz primitiva módulo $2^k$ para $k \geq 2$. Logo $t \in \{2^{k-2}, 2^{k-1}\}$ e
+    basta mostrar que $5^{2^{k-2}} \not \equiv 1 \pmod {2^{k+1}}$. Para isso, vamos calcular $\nu_2(5^{2^{k-2}} - 1)$. Vamos usar uma fatoração esperta,
+    repetindo o fato que $x^2 - 1 = (x+1)(x-1)$, temos
+    \[
+        (5^{2^{k-2}} - 1) = (5^{2^{k-3}} + 1)(5^{2^{k-4}} + 1)\dots (5^{2} + 1)(5 + 1)(5 - 1) = 4 \cdot \prod_{j=0}^{k-3} (5^{2^j} + 1). 
+    \]
+    Como $5 \equiv 1 \pmod 4$, para qualquer número par $s$, $5^s \equiv 1 \pmod 4$ e portanto $5^s + 1 \equiv 2 \pmod 4$. Em particular,
+    $\nu_2(5^s + 1) = 1$. Usando esse fato na expressão acima, temos 
+    \[
+        \nu_2(5^{2^{k-2}} - 1) = \nu_2(4) + \sum_{j=0}^{k-3}\nu_2(5^{2^j} + 1) = 2 + k-2 = k.
+    \]
+    Portanto $2^{k+1} \nmid 5^{2^{k-2}} - 1$, ou seja $5^{2^{k-2}} \not \equiv 1 \pmod {2^{k+1}}$.
+\end{proof}
+
+\begin{proof}
+    \textbf{(b)} Essa prova é um belo problema de contagem. Note que como $5 \equiv 1 \pmod 4$, para todo $k$, $5^k \equiv 1 \pmod 4$.
 \end{proof}
 
 \begin{problem}
