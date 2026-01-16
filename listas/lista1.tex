@@ -100,6 +100,13 @@
     
 \end{proof}
 
+A seguinte definição será útil para os próximos dois problemas.
+\begin{definition}
+    Dado $p$ primo e $n \neq 0$ inteiro, 
+    \[
+        \nu_p(n) = \max \{ \alpha \in \N: p^\alpha \mid n\}
+    \]
+\end{definition}
 
 \begin{problem}
     Seja $p$ um primo ímpar, $a$ um inteiro e $n$ um inteiro positivo. Sejam $\alpha$ e $\beta$ inteiros negativos, com $\alpha > 0$. Prove:
@@ -111,9 +118,94 @@
     \end{enumerate}
 \end{problem}
 
+\begin{proof}
+    \textbf{(a)} Considere o caso particular $\nu_p(a - 1) = \alpha > 0$ e $\nu_p(n) = \beta = 0$,
+    queremos mostrar que $\nu_p(a^n - 1) = \alpha$, temos
+    \begin{align*}
+        a^n - 1 &= (a-1) \cdot \bigg(\sum_{j=0}^{n-1} a^j \bigg)\\
+        \nu_p(a^n - 1) &= \nu_p(a-1) + \nu_p\bigg( \sum_{j=0}^{n-1} a^j \bigg) = \alpha + \nu_p\bigg( \sum_{j=0}^{n-1} a^j \bigg)
+    \end{align*}
+    então basta mostrar que $\nu_p\big( \sum_{j=0}^{n-1} a^j \big) = 0$. Verificamos que, como $\nu_p(a-1) > 0$, $p \mid (a-1)$, ou seja $a \equiv 1 \pmod p$. Mas então 
+    \[
+    \sum_{j=0}^{n-1} a^j \equiv \sum_{j=0}^{n-1} 1 \equiv n \not \equiv 0 \pmod p,
+    \]
+    ou seja $p \nmid \sum_{j=0}^{n-1} a^j$ e $\nu_p\big( \sum_{j=0}^{n-1} a^j \big) = 0$.
+
+    Vamos provar indutivamente para $n = p^\beta$, $\beta \geq 1$, o caso base principal é $n = p$. Queremos mostrar que $\nu_p(a^p - 1) = \nu_p(a-1) + 1$, ou seja, como antes, que $\nu_p\big( \sum_{j=0}^{p-1} a^j \big) = 1$.
+    Como $\nu_p(a-1) = \alpha$, escrevemos $a = p^\alpha s + 1$ com $(p,s) = 1$. O somatório se traduz como $\big( \sum_{j=0}^{p-1} (p^\alpha s + 1)^j \big)$. Se $\alpha \geq 2$,
+    segue que 
+    \[
+        \sum_{j=0}^{p-1} (p^\alpha s + 1)^j \equiv \sum_{j=0}^{p-1} 1 \equiv p \pmod {p^2}
+    \]
+    logo $p \mid \sum_{j=0}^{p-1} (p^\alpha s + 1)^j$, mas $p^2$ não, e portanto $\nu_p\big( \sum_{j=0}^{p-1} a^j \big) = 1$. Se $\alpha = 1$, temos 
+    \[
+        \sum_{j=0}^{p-1} (ps + 1)^j \equiv \sum_{j=0}^{p-1} (1 + jps) \equiv p + ps\cdot(p(p-1)/2) \equiv p \pmod {p^2}
+    \]
+    e o resultado segue também.
+
+    Para o passo indutivo, suponha que o resultado vale para $\beta \geq 1$ e seja $n = p^{\beta + 1}$. Então,
+    \[
+        a^{n} - 1 = a^{p^{\beta + 1}} - 1 = (a^p)^{p^{\beta}} - 1,
+    \]
+    por indução com os parâmetros $(a = a^p)$ e $(n = p^\beta)$, temos
+    \[
+        \nu_p(a^n - 1) = \nu_p(a^p - 1) + \nu_p(p^\beta) = \nu_p(a-1) + 1 + \beta = \nu_p(a-1) + \nu_p(p^{\beta + 1}),
+    \]
+    o que prova a afirmação.
+
+    Já temos o suficiente para o caso geral, suponha que $\nu_p(a-1) =\alpha \geq 1$ e $\nu_p(n) = \beta$, de onde $n = p^\beta \cdot k$ com $(p,k) = 1$. Então
+    \[
+        a^n - 1 = (a^{p^\beta})^k - 1 = (a^{p^\beta} - 1) \cdot \bigg(\sum_{j = 0}^{k-1} (a^{p^\beta})^j\bigg),
+    \]
+    já sabemos que $\nu_p((a^{p^\beta} - 1)) = \alpha + \beta$, então basta mostrar que o somatório não é divisivel por $p$. Notamos, pelo teorema de Fermat,
+    que para qualquer $\beta \geq 1$,
+    \[
+        a^{p^\beta} = (a^p)^{p^{\beta - 1}} \equiv a^{p^{\beta - 1}} \pmod p,
+    \]
+    ou seja $a^{p^\beta} \equiv a \pmod p$, mas $a \equiv 1 \pmod p$ pois $\nu_p(a-1) \geq 1$. No somatório, isso se traduz como
+    \[
+        \sum_{j = 0}^{k-1} (a^{p^\beta})^j \equiv \sum_{j=0}^{k-1} 1 \equiv k \not \equiv 0 \pmod p,
+    \]
+    pois $(k,p) = 1$. Isto finaliza a demonstração.
+\end{proof}
+
+A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da outra fatoração usual. Serei um pouco mais sucinto.
 
 \begin{proof}
-    
+    \textbf{(b)} Caso $\nu_p(n) = \beta = 0$ e $\nu_p(a + 1) = \alpha \geq 1$. Escrevemos 
+    \[
+        a^n + 1 = (a + 1) \cdot \bigg( \sum_{j = 0}^{n-1} (-1)^j a^j \bigg) \Rightarrow \nu_p(a^n + 1) = \alpha + \nu_p\bigg( \sum_{j = 0}^{n-1} (-1)^j a^j \bigg)
+    \]
+    como $\alpha \geq 1$, $a \equiv -1 \pmod p$, ou seja 
+    \[
+        \sum_{j = 0}^{n-1} (-1)^j a^j \equiv \sum_{j=0}^{n-1} (-1)^{2j} \equiv n \not \equiv 0 \pmod p
+    \]
+    e portanto $\nu_p\big( \sum_{j = 0}^{n-1} (-1)^j a^j\big) = 0$.
+
+    Caso $n = p$, $\nu_p(a+1) = \alpha \geq 1$. Como no caso anterior, basta mostrar que $\nu_p\big( \sum_{j = 0}^{p-1} (-1)^j a^j\big) = 1$.
+    Escrevemos $a = p^\alpha s - 1$ com $(p,s) = 1$. Substituindo no somatório,
+    \[
+        \sum_{j = 0}^{p-1} (-1)^j a^j = \sum_{j = 0}^{p-1} (-p^\alpha s + 1)^j \equiv p + p^\alpha s \cdot (p(p-1)/2) \equiv p + p^{\alpha + 1}(p-1)/2 \pmod{p^{2\alpha}}  
+    \]
+    como $\alpha \geq 1$ e $p$ é ímpar, tomando a última equivalência módulo $p^2$ vemos que $\big( \sum_{j = 0}^{p-1} (-1)^j a^j \big) \equiv p \pmod{p^2}$,
+    e isso nos dá o resultado que queríamos.
+
+    Caso $n = p^{\beta + 1}$ com $\beta \geq 1$, $\nu_p(a + 1) = \alpha \geq 1$. Exatamente como antes, suponha, por indução, que o resultado é válido para $n = p^\beta$, segue que 
+    \[
+        \nu_p(a^n + 1) = \nu_p\bigg((a^{p})^{p^\beta} + 1 \bigg) = \nu_p(a^p + 1) + \nu_p(p^{\beta}) = \alpha + 1 + \beta.
+    \]
+    onde usamos o caso anterior da prova na última igualdade.
+
+    Caso $n = p^\beta k$ com $(k,p) = 1$ e $\beta \geq 1$, $\nu_p(a+1) = \alpha \geq 1$. Escrevemos (como no item anterior),
+    \[
+        a^n + 1 = (a^{p^\beta} + 1) \cdot \bigg(\sum_{j=0}^{k-1} (-a^{p^\beta})^j \bigg).
+    \]
+    Pelo caso indutivo anterior, já sabemos que $\nu_p(a^{p^\beta} + 1) = \alpha + \beta$, basta mostrar que $\sum_{j=0}^{k-1} (-a^{p^\beta})^j \not \equiv 0 \pmod p$.
+    Mas, pela mesma observação de antes, se $\beta \geq 1$, $a^{p^\beta} \equiv a \pmod p$ e, como $a \equiv -1 \pmod p$, temos 
+    \[
+        \sum_{j=0}^{k-1} (-a^{p^\beta})^j \equiv \sum_{j=0}^{k-1} (-1 \cdot -1)^j \equiv k \not \equiv 0 \pmod p.
+    \]
+    O que completa a demosntração.
 \end{proof}
 
 
@@ -126,7 +218,11 @@
 \end{problem}
 
 \begin{proof}
-    
+    \textbf{(a)} Vamos provar por indução em $k$. O resultado é claro para $k = 2$ pois $5 \equiv 1 \pmod 4$. Suponha que vale para $k \geq 2$, vamos provar para $k+1$. Isto é,
+    queremos mostrar que $t = \text{ord}_{2^{k+1}} 5 = 2^{k-2}$, sabemos que 
+    \[
+        \text{ord}_{2^k} 5 \mid t = \text{ord}_{2^{k+1}} 5 \mid \varphi(2^{k+1}) = 2^{k} \Rightarrow t \in \{2^{k-2}, 2^{k-1}, 2^{k}\}
+    \]
 \end{proof}
 
 \begin{problem}
