@@ -64,12 +64,7 @@
         \frac{(z_0 + 1)}{c} - - \bigg(\frac{(x_0+1)}{a} + \frac{(y_0+1)}{b}\bigg) = \frac{(z_0 + 1)}{c} + \frac{(x_0+1)}{a} + \frac{(y_0+1)}{b} =
         \frac{n + bc + ac + ab}{abc} > 2
     \]
-    pois $n > 2abc - bc - ac - ab$. Segue que o intervalo $\bigg(- \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b}, \frac{(z_0 + 1)}{c}\bigg)$ tem ao menos dois inteiros.
-    Particularmente, os números %mais casos aqui
-    \[ 
-        \bigg\lceil - \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b} \bigg\rceil \quad \text{e} \quad \bigg\lceil - \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b} \bigg\rceil + 1
-    \]
-    pertencem ao intervalo. Tomando
+    pois $n > 2abc - bc - ac - ab$. Segue que o intervalo $\bigg(- \frac{(x_0+1)}{a} - \frac{(y_0+1)}{b}, \frac{(z_0 + 1)}{c}\bigg)$ tem ao menos dois inteiros. Tomando
     \begin{align*}
         r = \begin{cases}
             \ceil{-(x_0+1)/a} & \text{se } -(x_0+1)/a \not\in \Z\\
@@ -111,7 +106,8 @@ A seguinte definição será útil para os próximos dois problemas.
 \begin{problem}
     Seja $p$ um primo ímpar, $a$ um inteiro e $n$ um inteiro positivo. Sejam $\alpha$ e $\beta$ inteiros negativos, com $\alpha > 0$. Prove:
     \begin{enumerate}[label=(\alph*)]
-        \item Se $p^\beta$ e $p^\alpha$ são as maiores potências de $p$ que dividem $n$ e $a-1$ respectivamente então $p^{\alpha + \beta}$ é 
+        \label{prob:1.3.a}
+        \item  Se $p^\beta$ e $p^\alpha$ são as maiores potências de $p$ que dividem $n$ e $a-1$ respectivamente então $p^{\alpha + \beta}$ é 
         a maior potência que divide $a^n - 1$.
         \item Se $n$ é ímpar e $p^\beta$ e $p^\alpha$ são as maiores potências de $p$ que dividem $n$ e $a+1$ respectivamente então $p^{\alpha + \beta}$ é a maior potência
         de $p$ que divide $a^n + 1$.
@@ -200,7 +196,7 @@ A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da
     \[
         a^n + 1 = (a^{p^\beta} + 1) \cdot \bigg(\sum_{j=0}^{k-1} (-a^{p^\beta})^j \bigg).
     \]
-    Pelo caso indutivo anterior, já sabemos que $\nu_p(a^{p^\beta} + 1) = \alpha + \beta$, basta mostrar que $\sum_{j=0}^{k-1} (-a^{p^\beta})^j \not \equiv 0 \pmod p$.
+    Pelo caso indutivo, já sabemos que $\nu_p(a^{p^\beta} + 1) = \alpha + \beta$, basta mostrar que $\sum_{j=0}^{k-1} (-a^{p^\beta})^j \not \equiv 0 \pmod p$.
     Mas, pela mesma observação de antes, se $\beta \geq 1$, $a^{p^\beta} \equiv a \pmod p$ e, como $a \equiv -1 \pmod p$, temos 
     \[
         \sum_{j=0}^{k-1} (-a^{p^\beta})^j \equiv \sum_{j=0}^{k-1} (-1 \cdot -1)^j \equiv k \not \equiv 0 \pmod p.
@@ -226,9 +222,10 @@ A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da
     Como $5$ não é raiz primitiva módulo $4$, não pode ser raiz primitiva módulo $2^k$ para $k \geq 2$. Logo $t \in \{2^{k-2}, 2^{k-1}\}$ e
     basta mostrar que $5^{2^{k-2}} \not \equiv 1 \pmod {2^{k+1}}$. Para isso, vamos calcular $\nu_2(5^{2^{k-2}} - 1)$. Vamos usar uma fatoração esperta,
     repetindo o fato que $x^2 - 1 = (x+1)(x-1)$, temos
-    \[
+    \begin{equation}
+        \label{lista1:eq:fatoracao_pot_2}
         (5^{2^{k-2}} - 1) = (5^{2^{k-3}} + 1)(5^{2^{k-4}} + 1)\dots (5^{2} + 1)(5 + 1)(5 - 1) = 4 \cdot \prod_{j=0}^{k-3} (5^{2^j} + 1). 
-    \]
+    \end{equation}
     Como $5 \equiv 1 \pmod 4$, para qualquer número par $s$, $5^s \equiv 1 \pmod 4$ e portanto $5^s + 1 \equiv 2 \pmod 4$. Em particular,
     $\nu_2(5^s + 1) = 1$. Usando esse fato na expressão acima, temos 
     \[
@@ -236,6 +233,7 @@ A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da
     \]
     Portanto $2^{k+1} \nmid 5^{2^{k-2}} - 1$, ou seja $5^{2^{k-2}} \not \equiv 1 \pmod {2^{k+1}}$.
 \end{proof}
+
 
 \begin{proof}
     \textbf{(b)} Essa prova é um belo problema de contagem. Note que como $5 \equiv 1 \pmod 4$, para todo $k$, $5^k \equiv 1 \pmod 4$. No entanto, para $k \geq 2$,
@@ -253,9 +251,91 @@ A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da
     Qual é o menor natural $n$ para o qual existe $k$ natural de modo que os 2026 últimos dígitos na representação decimal de $n^k$ são iguais a $1$?
 \end{problem}
 
-
 \begin{proof}
-    
+    Esse problema é cabuloso e não fui capaz de resolvê-lo sozinho, nem mesmo com dicas - a solução escrita aqui segue a da \href{https://www.obm.org.br/content/uploads/2017/01/eureka38.pdf}{revista Eureka}.
+
+    Note que a questão se resume a achar o menor $n > 0$ tal que existe $k$ satisfazendo
+    \[
+        n^k \equiv \sum_{j=0}^{2025} 10^j \equiv \frac{10^{2026} - 1}{9} \equiv -1\cdot 9^{-1}\pmod{10^{2026}}, 
+    \]
+    equivalentemente, usando o Teorema Chinês dos Restos,
+    \begin{align*}
+        n^k \equiv -9^{-1} \pmod{2^{2026}}\\
+        n^k \equiv -9^{-1} \pmod{5^{2026}}.\\
+    \end{align*}
+    A ideia da prova é inicialmente restringir $n$, fazemos isso olhando para congruências simples.
+    Vamos olhar módulo potências de 2. Como $n^k$ deve terminar com $1$, temos que $n$ tem que ser ímpar. Olhando a primeira congruência módulo 8, temos
+    \[
+    n^k \equiv -1 \pmod 8,
+    \]
+    mas como todo número ímpar ao quadrado é $1$ módulo 8, devemos ter que $n \equiv -1 \pmod 8$ e $k \equiv 1 \pmod 2$ ou seja $k = 2l + 1$.
+    Olhando módulo $16$, segue que $n$ é congruente a $7$ ou $15$. Mas, se $n$ fosse $\overline{15}$, teríamos
+    $15^{2l + 1} \equiv -1 \equiv -9^{-1} \pmod {16}$, o que é absurdo pois $-1 \cdot -9 \equiv 9 \not \equiv 1 \pmod {16}$. Portanto $n \equiv 7 \pmod {16}$ e 
+    essa é nossa primeira congruência de importância.
+
+    Olhando módulo $5$, vemos que $n^{2l + 1} \equiv - (-1)^{-1} \equiv 1 \pmod 5$, logo $n \equiv 1 \pmod 5$. Isso segue, pois $-1^{2l + 1} \equiv -1$ e ${-3}^{2l+1} \equiv 2^{2l + 1} \in \{-2,2\}$
+    portanto nem $2$ e nem $3$ podem são tais que elevados a um ímpar dão $-1 \pmod 5$.
+
+    Sabemos então que $n \equiv 1 \pmod 5$ e que $n \equiv 7 \pmod {16}$, resolvendo o sistema, temos que $n \equiv 71 \pmod {80}$ e aqui devemos fazer um salto de fé e sonhar que 
+    $71$ seja solução.
+
+    Vamos tentar cálcular $t_5 := \text{ord}_{5^{2026}} 71$ usando o problema anterior. Notamos que $t_5 \mid \varphi(5^{2026}) = 4\cdot5^{2025}$. Uma boa estratégia
+    é entender o valor de $\nu_5(71^s - 1)$, se este for maior ou igual a $2026$ temos que $71^s \equiv 1 \pmod {5^{2026}}$. Pelo primeiro item do exercício anterior [\ref{prob:1.3.a}],
+    temos 
+    \[
+    \nu_5(71^s - 1) = \nu_5(s) + \nu_5(71 - 1) = \nu_5(s) + 1,
+    \]
+    portanto, se $s = 5^{2025}$, vemos que
+    \[
+        \nu_5(71^{5^{2025}} - 1) = 2026 \Rightarrow 71^{5^{2025}} \equiv 1 \pmod {5^{2026}},
+    \]
+    mas, crucialmente, se $s = 5^x$ com $x < 2025$, então $\nu_5(71^{5^{x}} - 1) = x + 1 < 2026$, e portanto $t_5 \neq 5^x$.
+    Isso significa que temos $t_5 = 5^{2025}$.
+
+    Para calcular $t_2 := \text{ord}_{2^{2026}} 71$ usaremos a mesma fatoração que no exercício anterior [\ref{lista1:eq:fatoracao_pot_2}]. Como $t_2 \mid \varphi(2^{2026}) = 2^{2025}$,
+    $t_2$ é da forma $2^x$ para algum $x \geq 1$. Vamos calcular $\nu_2(71^{2^x} - 1)$ usando a fatoração. Note que
+    \begin{align*}
+        (71^{2^{x}} - 1) = (71 - 1) \cdot \prod_{j=0}^{x-1} (71^{2^j} + 1) = (71 - 1)\cdot(71+1)\cdot\prod_{j=1}^{x-1} (71^{2^j} + 1) \\
+        \nu_2(71^{2^{x}} - 1) = \nu_2(70) + \nu(72) + \sum_{j=1}^{x-1}\nu_2(71^{2^x} + 1)
+    \end{align*}
+
+    Como $71 \equiv -1 \pmod 8$, para qualquer $x \geq 1$ vale que $71^{2^x} = (-1^2)^{2^{x-1}} \equiv 1 \pmod 8$, ou seja $71^{2^x} + 1 \equiv 2 \pmod 8$. Portanto
+    $\nu_2(71^{2^j} + 1) = 1$. Substituindo na equação acima temos:
+    \[
+        \nu_2(71^{2^{x}} - 1) = 1 + 3 + x-1 = x + 3.
+    \]
+    Assim como antes, segue que $71^{2^{2023}} \equiv 1 \pmod {2^{2026}}$, mas $71^{2^{x}} \not \equiv 1 \pmod {2^{2026}}$ para qualquer $x \leq 2022$. Logo sabemos que
+    $t_2 = 2^{2023}$.
+
+    Agora estamos quase prontos. Como $71 \equiv 1 \pmod 5$, $t_5 = 5^{2025}$ e há exatamente $5^{2025}$ números $0 \leq m < 5^{2026}$ com $m \equiv 1 \pmod 5$,
+    segue que para cada um deles, existe $0\leq s < t_5$ com $71^{s} \equiv m \pmod {5^{2025}}$. Em particular,
+    como $\frac{-1}{9} \equiv 1 \pmod 5$, segue que existe $0 \leq k_5 < t_5$ com
+    \[
+        71^{t_5} \equiv -(9)^{-1} \pmod {5^{2026}}.
+    \]
+
+    Da mesma forma, $71 \equiv 7 \pmod {16}$, portanto $71^x \equiv \{1,7\} \pmod {16}$. Mas existem exatamente $2^{2023}$ números $0 \leq m < 2^{2026}$ com $m \equiv \{1,7\} \pmod {16}$,
+    portanto para cada um deles existe um único $0 \leq s < t_2$ com $71^x \equiv m \pmod{16}$. Em particular, como $-1 \equiv 7\cdot9 \pmod 16$, segue que $\frac{-1}{9} \equiv 7 \pmod{16}$
+    e existe $0 \leq k_2 < t_2$ com 
+    \[
+        71^{t_2} \equiv -(9)^{-1} \pmod {2^{2026}}.
+    \]
+
+    Como $(t_2,t_5) = (2^{2023}, 5^{2025}) = 1$, segue pelo teorema chinês dos restos, que existe $k > 0$ natural grande satisfazendo 
+    \begin{align*}
+        71^k > 10^{2027}\\
+        k \equiv k_2 \pmod{t_2}\\
+        k \equiv k_5 \pmod{t_5}
+    \end{align*}
+    E por fim (graças a deus), 
+    \begin{align*}
+        71^{k} = 71^{k_2 + q\cdot t_2} \equiv -9^{-1} \pmod {2^{2026}}\\
+        71^{k} = 71^{k_5 + r\cdot t_5} \equiv -9^{-1} \pmod {5^{2026}}\\
+        71^{k} \equiv \frac{10^{2026} - 1}{9} \equiv \underbrace{111\dots1}_{2026} \pmod{10^{2026}}
+    \end{align*}
+    Portanto, $n = 71$.
+     
+
 \end{proof}
 
 \begin{problem}
