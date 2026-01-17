@@ -90,9 +90,34 @@
     \end{enumerate}
 \end{problem}
 
+\begin{proof}
+\textbf{(a)} Como 1 é sempre resíduo quadrático, sabemos que $s \geq 2$. Notamos que, pela propriedade multiplicativa dos símbolos de Legendre,
+para todo $1 \leq k \leq (s-1)$, vale que 
+\[
+    \bigg(\frac{ks}{p}\bigg) = \bigg(\frac{k}{p}\bigg)\bigg(\frac{s}{p}\bigg) = 1\cdot-1 = -1.
+\]
+Isto é, nenhum dos números $\{s, 2s, \dots (s-1)s\}$ são resíduos quadráticos. Como $p$ é um primo ímpar, temos que ao menos $(p-1)/2$ elementos de $\Z_p$ 
+não são resíduos quadráticos, logo $p > s$. Suponha que $p < s(s-1)$, então existe $1 \leq k < (s-1)$ tal que
+\[
+    sk < p < s(k+1).
+\]
+Isso é, $s(k+1) = p + r$ onde $0 < r < s$ e temos $s(k+1) \equiv r \pmod p$. Portanto $-1 = \big(\frac{s(k+1)}{p}\big) = \big(\frac{r}{p}\big) = 1$, absurdo.
+\end{proof}
 
 \begin{proof}
-    
+    \textbf{(b)} Segue muito similarmente da letra anterior. Note que como $p > 5$, se $s = 2$, $p > 2\cdot2^2 - 2 = 6$, já que o próximo primo ímpar é 7.
+    Podemos supor que $\big(\frac{2}{p}\big) = 1$ e $s > 2$. Já que temos $\big(\frac{-1}{p}\big) = 1$, sabemos que para todo $1 \leq k \leq (s-1)$,
+    \[
+        \bigg(\frac{-2sk}{p}\bigg) = \bigg(\frac{2sk}{p}\bigg) = -1.
+    \]
+    Agora suponha que $p < 2s^2 - s$ ou, posto de forma mais instrutiva, $p < 2s(s-1) + s$. Então existe $1 \leq k \leq (s-1)$ tal que 
+    \[
+        p \in (2sk - s, 2sk + s).
+    \]
+    Note que como $p$ é um primo maior que $s$, ele não pode estar nas bordas destes intervalos (que são múltiplas de s).
+    Se vale que $2sk - s < p < 2sk$, então $2sk = p + r$ onde $0 < r < s$, logo $-1 = \big(\frac{2ks}{p}\big) = \big(\frac{r}{p}\big) = 1$, o que é absurdo.
+    Se por outro lado, vale que $2sk < p < 2sk + s$, então podemos escrever $2sk = p - r$ onde $0 < r < s$ e $2sk \equiv -r \pmod p$, teríamos 
+    $-1 = \big(\frac{2ks}{p}\big) = \big(\frac{-r}{p}\big) = 1$, absurdo também.
 \end{proof}
 
 A seguinte definição será útil para os próximos dois problemas.
