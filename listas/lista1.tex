@@ -336,17 +336,17 @@ A prova do segundo item é quase que idêntica a do primeiro, só fazemos uso da
     segue que para cada um deles, existe $0\leq s < t_5$ com $71^{s} \equiv m \pmod {5^{2025}}$. Em particular,
     como $\frac{-1}{9} \equiv 1 \pmod 5$, segue que existe $0 \leq k_5 < t_5$ com
     \[
-        71^{t_5} \equiv -(9)^{-1} \pmod {5^{2026}}.
+        71^{k_5} \equiv -(9)^{-1} \pmod {5^{2026}}.
     \]
 
     Da mesma forma, $71 \equiv 7 \pmod {16}$, portanto $71^x \equiv \{1,7\} \pmod {16}$. Mas existem exatamente $2^{2023}$ números $0 \leq m < 2^{2026}$ com $m \equiv \{1,7\} \pmod {16}$,
-    portanto para cada um deles existe um único $0 \leq s < t_2$ com $71^x \equiv m \pmod{16}$. Em particular, como $-1 \equiv 7\cdot9 \pmod 16$, segue que $\frac{-1}{9} \equiv 7 \pmod{16}$
+    portanto para cada um deles existe um único $0 \leq s < t_2$ com $71^s \equiv m \pmod{2^{2026}}$. Em particular, como $-1 \equiv 7\cdot9 \pmod {16}$, segue que $\frac{-1}{9} \equiv 7 \pmod{16}$
     e existe $0 \leq k_2 < t_2$ com 
     \[
-        71^{t_2} \equiv -(9)^{-1} \pmod {2^{2026}}.
+        71^{k_2} \equiv -(9)^{-1} \pmod {2^{2026}}.
     \]
 
-    Como $(t_2,t_5) = (2^{2023}, 5^{2025}) = 1$, segue pelo teorema chinês dos restos, que existe $k > 0$ natural grande satisfazendo 
+    Como $(t_2,t_5) = (2^{2023}, 5^{2025}) = 1$, pelo teorema chinês dos restos, existe $k > 0$ natural grande satisfazendo 
     \begin{align*}
         71^k > 10^{2027}\\
         k \equiv k_2 \pmod{t_2}\\
