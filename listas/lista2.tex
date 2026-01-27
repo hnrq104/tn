@@ -6,8 +6,13 @@
     $x_{k+1} \equiv x_k \pmod n$ para todo $k \geq N$.
 \end{problem}
 
+\begin{obs}
+Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_{k+1} = a^{x_k} \geq 2^{x_k} > x_k$ e tende para infinito.
+\end{obs}
+
 \begin{proof}
-    Vamos provar por indução em $n$. Para $n = 1$ o resultado é óbvio, uma vez que $x_{k} \equiv 0 \pmod 1$ para todo $k$ independente de $a$.
+    Note que se $a = 1$, então o resultado segue pois $x_k = 1$ para todo $k$.
+    Vamos provar por indução em $n$ para $a \neq 1$. Para $n = 1$ é óbvio, uma vez que $x_{k} \equiv 0 \pmod 1$ para todo $k$ independente de $a$.
     Seja $n > 1$ e suponha que vale para todo $m < n$, i.e. existe $N_m$ tal que se $k \geq N_m$, então $x_{k+1} \equiv x_k \pmod m$.
     Fatorando $n$, podemos supor que
     \[
@@ -15,6 +20,30 @@
     \]
     com os $p_i$ sendo primos distintos. Pelo Teorema Chinês dos Restos, o problema se resume a mostrar que existe $N$ tal que para todo $k \geq N$,
     \[
-        \forall 1 \leq i \leq r,\quad x_{k+1} \equiv x_{k} \pmod{p_i^{\alpha_i}}
+        \forall 1 \leq i \leq r,\quad x_{k+1} \equiv x_{k} \pmod{p_i^{\alpha_i}}.
     \]
+    Vamos encontrar um $N_i$ para cada $p_i$ e tomar $N = \max \,\{N_i : 1 \leq i \leq r\}$.
+    Se $(a,p_i) = p_i$, temos $a = p_iq$ e basta que $x_k \geq \alpha_i$ para $x_{k+1} = a^{x_k} = (p_i\cdot q)^{x_k} \equiv 0 \pmod{p_i^{\alpha_i}}$. Como $x_k \to \infty$,
+    existe $N_i$ satisfazendo $x_k \equiv 0 \pmod{p_i^{\alpha_i}}$ para todo $k \geq N_i$. Por outro lado, se $(a,p_j) = 1$, podemos
+    usar indutivamente o resultado para $m = \varphi(p_j^{\alpha_j}) < n$ de onde segue que existe $M_j$ tal que
+    \[
+        x_{k+1} \equiv x_{k} \pmod{m} \quad \forall k \geq M_j,
+    \]
+    portanto
+    \[
+        x_{k+2} = a^{x_{k+1}} = a^{m\cdot t + x_{k}} \equiv a^{x_k} = x_{k+1} \pmod {p_j^{\alpha_j}} \quad \forall k \geq M_j
+    \]
+    e portanto, podemos tomar $N_j = M_j + 1$. Tomando $N$ o máximo dos $N_i$, segue que 
+    \[
+    \forall k \geq N, \forall 1 \leq i \leq r \quad x_{k+1} \equiv x_{k} \pmod{p_i^{\alpha_i}}
+    \]
+    e, por fim,
+    \[
+    x_{k+1} \equiv x_{k} \pmod{n} \quad \forall k \geq N
+    \]    
+
 \end{proof}
+
+\begin{problem}
+    
+\end{problem}
