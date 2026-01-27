@@ -1,0 +1,20 @@
+\pagebreak
+\section{Lista 2 - 26/01/2026}
+
+\begin{problem}
+    Sejam $a,n \in \N^*$ e considere a sequência $(x_k)$ definida por $x_1 = a, x_{k+1} = a^{x_k}$ para todo $k \in \N$. Demonstre que existe $N \in \N$ tal que 
+    $x_{k+1} \equiv x_k \pmod n$ para todo $k \geq N$.
+\end{problem}
+
+\begin{proof}
+    Vamos provar por indução em $n$. Para $n = 1$ o resultado é óbvio, uma vez que $x_{k} \equiv 0 \pmod 1$ para todo $k$ independente de $a$.
+    Seja $n > 1$ e suponha que vale para todo $m < n$, i.e. existe $N_m$ tal que se $k \geq N_m$, então $x_{k+1} \equiv x_k \pmod m$.
+    Fatorando $n$, podemos supor que
+    \[
+        n = \prod_{i=1}^{r} p_i^{\alpha_i}
+    \]
+    com os $p_i$ sendo primos distintos. Pelo Teorema Chinês dos Restos, o problema se resume a mostrar que existe $N$ tal que para todo $k \geq N$,
+    \[
+        \forall 1 \leq i \leq r,\quad x_{k+1} \equiv x_{k} \pmod{p_i^{\alpha_i}}
+    \]
+\end{proof}
