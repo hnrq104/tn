@@ -125,7 +125,7 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
     \[
         \frac{\log{a_{n+1}}}{\log q_n} < \gamma' - 2 \quad \text{e} \quad \log a_{n+1} < (\gamma' - 2)\log q_n,
     \]
-    como $q_{n+1} = a^{n+1}q_n + q_{n-1} < 2a_{n+1}q_n$, segue que, para todo $n \geq N$
+    como $q_{n+1} = a_{n+1}q_n + q_{n-1} < 2a_{n+1}q_n$, segue que, para todo $n \geq N$
     \[
         \log q_{n+1} < \log 2 + \log{a_{n+1}} + \log q_n \leq \log(2) + (\gamma' - 1) \log q_n
     \]
@@ -159,5 +159,59 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
     \text{ord} \a > 2 + \lim_{j \to \infty} \frac{\log a_{n_j}}{\log q_{n_j - 1}} > 2 + \lim_{n_j \to \infty} \frac{(\gamma - 1)^{n_j}}{2K(\gamma'- 1)^{n_j - 1}} = \infty .
     \]
     o que é absurdo (na verdade provamos que deve ser que $\text{ord} \a = \infty$, de onde a desigualdade segue trivialmente).
+
+    Para \textbf{(c)}, se $c = 2$ basta tomar $a_n = 1$ e o resultado segue. Caso $c > 2$, queremos $a_n \in \Z$ tal que
+    \[
+        1 + \exp(\lim_{n\to\infty} \frac{\log \log (a_n + 1)}{n}) = c
+    \]
+    desenvolvendo, uma alternativa seria
+    \[
+        a_n + 1 = \exp\exp(n\log(c-1)).
+    \]
+    Para facilitar as contas, vamos tomar $\alpha = [0; a_1, a_2, \dots]$ para $a_n$ sendo 
+    \[
+        a_n = \ceil{\exp\exp(n\log(c-1))} \in \N^*
+    \]
+    e veremos que $\text{ord} \alpha = c$. Já sabemos que 
+    \begin{align*}    
+        \text{ord}\alpha &\geq 1 + \exp(\limsup_{n\to\infty} \frac{\log\log (a_n + 1)}{n}) \\
+        &\geq 1 + \exp(\limsup_{n \to \infty} \frac{\log\log(\exp\exp(n\log(c-1)))}{n})\\
+        &\geq 1 + \exp(\limsup_{n \to \infty} \log(c-1)) = c
+    \end{align*}
+    Para a outra desigualdade, lembramos que
+    \[
+        q_{n} = a_{n}q_{n-1} + q_{n-2} \geq a_{n}q_{n-1}
+    \]
+    e portanto, por indução
+    \[
+        \log q_n \geq \sum_{j=1}^{n} \log a_j
+    \]
+    substituindo nossos valores e usando a soma da progressão aritmética, temos 
+    \[
+        \log q_n \geq \sum_{j=1}^{n} \exp(j\log(c-1)) = \frac{\exp((n+1)\log (c-1)) - \exp(\log (c-1))}{\exp(\log (c-1)) - 1} = \frac{(c-1)^{n+1} - (c-1)}{c - 2}.
+    \]
+    Temos também que (para $n$ suficientemente grande)
+    \[
+        \log a_{n+1} \leq \log(2\exp\exp((n+1)\log(c-1))) = \log(2) + \exp(n\log(c-1)) = \log(2) + (c-1)^{n+1}
+    \]
+
+    Logo,
+    \[
+        \text{ord} \alpha = 2 + \limsup_{n\to\infty} \frac{\log a_{n+1}}{q_n} \leq 2 + \limsup_{n\to\infty} \frac{(c-2)((c-1)^{n+1} + \log(2))}{(c-1)^{n+1} - (c-1)} = 2 + c - 2 = c.
+    \]
+    
+    \textbf{(d)} Basta usar o que já conhecemos. De $q_{n} = a_n q_{n-1} + q_{n-2}$, temos 
+    \[
+        \sum_{i = 1}^{n} \log a_n \leq q_n \leq \sum_{i = 1}^{n} \log (a_n + 1) \leq \sum_{i = 1}^{n} \log (a_n + 1)  \leq \sum_{i = 1}^{n} \log(a_n) + \frac{1}{a_n}
+    \]
+    portanto, se $a_n = 2^n$, segue 
+    \[
+      \frac{n(n-1)\log 2}{2} = \log 2\bigg(\sum_{i=1}^{n} i \bigg) \leq \log q_n \leq \log 2\bigg(\sum_{i=1}^{n} i \bigg) + 1 = \frac{n(n-1)\log 2}{2} + 1
+    \]
+    ou seja $\log q_n = \Theta(n^2)$, substituindo na fórmula de $\text{ord} \alpha$, vemos 
+    \[
+        \text{ord} \alpha = 2 + \limsup_{n \to \infty} \frac{\log a_{n+1}}{\log q_n} = 2 + \limsup_{n\to\infty} \frac{(n+1)\log 2}{\Theta(n^2)} = 2.
+    \]
+
     
 \end{proof}
