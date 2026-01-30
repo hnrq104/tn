@@ -11,23 +11,25 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
 \end{obs}
 
 \begin{proof}
-    Note que se $a = 1$, então o resultado segue pois $x_k = 1$ para todo $k$.
-    Vamos provar por indução em $n$ para $a \neq 1$. Para $n = 1$ é óbvio, uma vez que $x_{k} \equiv 0 \pmod 1$ para todo $k$ independente de $a$.
-    Seja $n > 1$ e suponha que vale para todo $m < n$, i.e. existe $N_m$ tal que se $k \geq N_m$, então $x_{k+1} \equiv x_k \pmod m$.
+    Caso $a = 1$, então o resultado segue pois $x_k = 1$ para todo $k$. Vamos provar os outros casos por indução em $n$.
+
+
+    Caso $a \neq 1$. Para $n = 1$ é óbvio, uma vez que $x_{k} \equiv 0 \pmod 1$ para todo $k$ independente de $a$.
+    Seja $n > 1$ e suponha que vale para todo $m < n$ i.e. existe $N_m$ tal que se $k \geq N_m$, então $x_{k+1} \equiv x_k \pmod m$.
     Fatorando $n$, podemos supor que
     \[
         n = \prod_{i=1}^{r} p_i^{\alpha_i}
     \]
-    com os $p_i$ sendo primos distintos. Pelo Teorema Chinês dos Restos, o problema se resume a mostrar que existe $N$ tal que para todo $k \geq N$,
+    com os $p_i$ sendo primos distintos. Pelo Teorema Chinês dos Restos, o problema se resume a mostrar que existe $N$ tal que para todo $k \geq N$, vale para todo $i$,
     \[
-        \forall 1 \leq i \leq r,\quad x_{k+1} \equiv x_{k} \pmod{p_i^{\alpha_i}}.
+        x_{k+1} \equiv x_{k} \pmod{p_i^{\alpha_i}}.
     \]
     Vamos encontrar um $N_i$ para cada $p_i$ e tomar $N = \max \,\{N_i : 1 \leq i \leq r\}$.
     Se $(a,p_i) = p_i$, temos $a = p_iq$ e basta que $x_k \geq \alpha_i$ para $x_{k+1} = a^{x_k} = (p_i\cdot q)^{x_k} \equiv 0 \pmod{p_i^{\alpha_i}}$. Como $x_k \to \infty$,
     existe $N_i$ satisfazendo $x_k \equiv 0 \pmod{p_i^{\alpha_i}}$ para todo $k \geq N_i$. Por outro lado, se $(a,p_j) = 1$, podemos
     usar indutivamente o resultado para $m = \varphi(p_j^{\alpha_j}) < n$ de onde segue que existe $M_j$ tal que
     \[
-        x_{k+1} \equiv x_{k} \pmod{m} \quad \forall k \geq M_j,
+        x_{k+1} \equiv x_{k} \pmod{m = \varphi(p_j^{\alpha_j})} \quad \forall k \geq M_j,
     \]
     portanto
     \[
@@ -45,5 +47,117 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
 \end{proof}
 
 \begin{problem}
-    
+    \begin{enumerate}[label=(\alph*)]
+        \item Seja $F_n = 2^{2^n} + 1$ o $n$-ésimo número de Fermat. Prove que todo fator primo de $F_n$ 
+    é da forma $k\cdot2^{n+1}$.
+        \item Prove que, se $n \geq 2$, então todo fator primo de $F_n$ é da forma $k\cdot2^{n+2} + 1$.
+        \item Mostre que $2^{2^5} + 1$ é composto.
+    \end{enumerate}
 \end{problem}
+
+\begin{proof}
+    Vamos fazer o item (a) e (b) simultâneamente. Note que, se $p \mid F_n$, então $p$ é ímpar e
+    \[
+        2^{2^n} \equiv -1 \pmod p \quad \land \quad 2^{2^{n+1}} \equiv 1 \pmod p,
+    \]
+    logo $t := \text{ord}_p 2 \mid 2^{n+1}$, i.e $t := 2^{q}$ com $1 \leq q \leq 2^{n+1}$. Agora usamos um truque já visto [\ref{lista1:eq:fatoracao_pot_2}], 
+    escrevemos
+    \begin{equation}
+        \label{l2:p2:eq1}
+        2^{2^n} + 1 = 2^{2^n} - 1 + 2 = \prod_{m = 0}^{n-1} (2^{2^m} + 1) + 2. 
+    \end{equation}
+    Vamos provar que $q = n+1$. Se $q \leq n$, sabemos do fato que $(2^{2^{q-1}})^2 \equiv 1 \pmod p$ e $2^{2^{q-1}} \not \equiv 1 \pmod p$
+    que $2^{2^{q-1}} \equiv -1 \pmod p$ e, portanto, tomando [\ref{l2:p2:eq1}] módulo $p$, achamos
+    \[
+    \prod_{m = 0}^{n-1} (2^{2^m} + 1) + 2 \equiv 0 + 2 \not \equiv 0 \pmod p
+    \]
+    absurdo, pois, por hipótese, $p \mid F_n$. Portanto $q = n+1$ e temos $t = 2^{n+1}$, logo $t = 2^{n+1} \mid \varphi(p) = p - 1$ e segue a letra \textbf{(a)},
+    $p = k \cdot 2^{n+1} + 1$. Para a letra \textbf{(b)}, basta perceber que, caso $n \geq 2$, então, pela letra (a), $p \equiv 1 \pmod 8$, ou seja 
+    $(\frac{2}{p}) = 1$, logo $2^{(p-1)/2} \equiv 1 \pmod p$ e segue (da mesma forma que antes) que $t = 2^{n+1} \mid (p-1)/2$, ou seja 
+    $p = k\cdot2^{n+2} + 1$.
+
+    Para a parte (c), usamos (b) e torcemos que achemos um fator rapidamente.
+\end{proof}
+
+\begin{problem}
+    Seja $\alpha = [a_0; a_1, a_2, \dots]$ um número real.
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove que, se $\text{ord} \alpha > 2$ então existe $\lambda > 1$ tal que para infinitos inteiros positivos $n$, temos
+        $a_n \geq \lambda^n$.
+        \item Prove que $\text{ord}\alpha \geq 1 + \exp(\limsup_{n\to\infty} \frac{\log \log (a_n + 1)}{n})$.
+        \item Prove que para todo $c \geq 2$, existe $\alpha \in \R$ tal que $\text{ord}\alpha = 1 + \exp(\limsup_{n\to\infty} \frac{\log \log (a_n + 1)}{n}) = c$.
+        \item Determine $\text{ord} \alpha$ se $a_n = 2^n, \forall n \geq 0$.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+    \textbf{(a)} Note que, como $q_{n} = a_{n}q_{n-1} + q_{n-2} \geq 2q_{n-2}$, segue (por indução) que $q_n \geq C2^{n/2}$ para alguma constante positiva $C$.
+    Portanto, para $1 < \gamma < \sqrt{2}$ e $n$ suficientemente grande, vale que $q_n \geq \gamma^n$  (na verdade, no pior caso,
+    $q_n$ cresce como a sequência de Fibonacci). Portanto, se $\text{ord} \alpha > 2$, segue que
+    \[
+        \text{ord} \a - 2 = \limsup_{n\to\infty} \frac{\log{a_{n+1}}}{\log{q_n}} > \eps > 0
+    \]
+    para algum $\eps > 0$ e
+    \[
+        \limsup_{n\to\infty} \frac{\log{a_{n+1}}}{\log(\gamma^n)} \geq \limsup_{n\to\infty} \frac{\log{a_{n+1}}}{\log{q_n}} > \eps\\
+    \]
+    
+    \[
+        \limsup_{n\to\infty} \frac{\log{a_{n+1}}}{n\log\gamma} > \eps
+    \]
+    i.e, existe sequência infinita $(n_j)$ tal que 
+    \[
+        \frac{\log{a_{n_j+1}}}{n_j\log\gamma} > \eps \quad \text{e} \quad a_{n_j + 1} > (\gamma^{\eps})^{n_j}.
+    \]
+    Como $\gamma^{\eps} > 1$, tomando $1 < \beta < \gamma^{\eps}$, segue que para $n_j$ suficientemente grande,
+    \[
+        a_{n_j + 1} > (\gamma^{\eps})^{n_j} > \beta^{n_j + 1},
+    \]
+    finalizando a questão.
+
+    \textbf{(b)} Suponha, por absurdo, que $\text{ord}\a < 1 + \exp(\limsup_{n\to\infty} \frac{\log\log(a_n + 1)}{n})$, então existem $\gamma, \gamma' \in \R$
+    tal que
+    \begin{equation}
+        \label{l2:p3:eq1}
+        2 + \limsup_{n\to\infty} \frac{\log a_{n+1}}{\log q_n} < \gamma' < \gamma < 1 + \exp(\limsup_{n\to\infty} \frac{\log\log(a_n + 1)}{n}).
+    \end{equation}
+    Da primeira desigualdade e da propriedade do $\limsup$ segue que existe $N \in \N$ tal que para todo $n \geq N$
+    \[
+        \frac{\log{a_{n+1}}}{\log q_n} < \gamma' - 2 \quad \text{e} \quad \log a_{n+1} < (\gamma' - 2)\log q_n,
+    \]
+    como $q_{n+1} = a^{n+1}q_n + q_{n-1} < 2a_{n+1}q_n$, segue que, para todo $n \geq N$
+    \[
+        \log q_{n+1} < \log 2 + \log{a_{n+1}} + \log q_n \leq \log(2) + (\gamma' - 1) \log q_n
+    \]
+    Resolvendo a recorrência até $N$, temos para $n > N$,
+    \[
+        \log q_{n} < \log 2 \cdot \bigg(\sum_{m = 0}^{n - N - 1} (\gamma' - 1)^m \bigg) + (\gamma' - 1)^{n - N} \log q_N
+    \]
+    ou seja, existe alguma constante positiva $K \in \R$, tal que, para todo $n$ maior que $N$,
+    \[
+        \log q_{n} < K(\gamma' - 1)^n.
+    \]
+    
+    Pela segunda desigualdade de [\ref{l2:p3:eq1}], segue que existe sequência $(n_j)$ infinita, tal que para todo $j$ vale 
+    \[
+        \exp\bigg(\frac{\log \log (a_{n_j} + 1)}{n_j}\bigg) > \gamma - 1
+    \]
+    portanto
+    \[
+        \log (a_{n_j} + 1) > (\gamma - 1)^{n_j},
+    \]
+    pela concavidade do $\log$,
+    \[
+        \log a_{n_j} + 1 > \log a_{n_j} + \frac{1}{a_{n_j}} > \log(a_{n_j} + 1) > (\gamma - 1)^{n_j}
+    \]
+    e sendo bem gastosos e supondo $n_j$ suficientemente grande,
+    \[
+        \log a_{n_j} > \frac{(\gamma - 1)^{n_j}}{2}.
+    \]
+    Agora vamos calcular um lowerbound para $\text{ord} \alpha$ usando essa sequência, segue que
+    \[
+    \text{ord} \a > 2 + \lim_{j \to \infty} \frac{\log a_{n_j}}{\log q_{n_j - 1}} > 2 + \lim_{n_j \to \infty} \frac{(\gamma - 1)^{n_j}}{2K(\gamma'- 1)^{n_j - 1}} = \infty .
+    \]
+    o que é absurdo (na verdade provamos que deve ser que $\text{ord} \a = \infty$, de onde a desigualdade segue trivialmente).
+    
+\end{proof}
