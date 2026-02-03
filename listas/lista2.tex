@@ -286,7 +286,59 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
     \]
     absurdo.
 
-    Para a segunda parte, vamos tentar primeiramente módulo $p$.
+    Para a segunda parte (mostrar que admite solução módulo $m$), vamos separar em casos. 
+    
+    Caso $m$ primo: se $m = 2$, então $(0,1)$ é solução; se $m = 3$, então 
+    $(1,0)$ é solução; se $m = 73$, $(6,1)$ é solução. Se $m$ é qualquer outro primo, então $(m,2) = 1$ e $(m,219) = 1$ e portanto queremos 
+    achar soluções módulo $m$ para 
+    \[
+        2x^2 \equiv 219y^2 - 1 \pmod m.
+    \]
+    Agora note que se definimos a função $f: \Z_m \to \Z_m$ dada por $f(x) = 2x^2 \pmod m$, segue, como há exatamente $(m-1)/2$ resíduos quadráticos, que $|f(\Z_m)| = (p+1)/2$.
+    Da mesma forma, definindo $g : \Z_m \to \Z_m$ dada por $g(y) = 219y^2 - 1$, temos $|g(\Z_m)| = (p+1)/2$. Pelo principio da casa dos pombos, existe $(x,y) \in (\Z_m)^2$ tal que 
+    $f(x) = g(y)$ e portanto solução $\pmod m$.
+
+    Caso $m = p^\alpha$ para $p$ primo e $\alpha > 1$: seguindo a ideia do Joseph, vamos tentar provar por indução em $\alpha$.
+    Seja $(x,y)$ solução para 
+    \[
+        2x^2 - 219y^2 + 1 \equiv 0 \pmod {p^{\alpha}} \quad \text{ou seja} \quad 2x^2 - 219y^2 + 1 = kp^{\alpha} 
+    \]
+    Se $k \equiv 0 \pmod p$, já temos o resultado. Podemos supor que $k \neq 0 \pmod p$. Vamos olhar para 
+    as soluções $\pmod {p^\alpha}$ dadas por $(x + ap^\alpha, y + bp^\alpha)$ para $a,b \in \Z$, note que 
+    \begin{align*}
+        2(x + ap^\alpha)^2 - 219(y + bp^\alpha)^2 + 1 &\equiv (2x^2 - 219y^2 + 1) + (4xap^\alpha - 437ybp^\alpha) \pmod{p^{\alpha + 1}}\\
+        & \equiv kp^\alpha + p^\alpha(4xa - 438yb)  \pmod{p^{\alpha + 1}}\\
+        & \equiv p^\alpha(k + 4xa - 438yb)  \pmod{p^{\alpha + 1}}
+    \end{align*}
+    então basta que $k + 4xa - 438yb \equiv 0 \pmod p$. Se $(4x,p) = 1$, então independente do valor de $b$ e $k$, sempre conseguimos achar $a$ que satisfaz a equação.
+    Se $(4x, p) = p$, ou $p = 2$ ou $p \mid x$. Se $p \mid x$, 
+    \[
+        219y^2 \equiv 2x^2 - 219y^2 \equiv -1 \pmod{p} 
+    \]
+    e portanto $(p,y) = 1$, donde segue que sempre podemos escolher $b$ a fim de satisfazer a equação. Caso $p = 2$ e $\alpha = 2$, então $(1,1)$ é solução, se $\alpha \geq 3$, buscamos soluções levemente diferentes.
+    Olhemos para $(x+a2^{\alpha - 1}, y+b2^{\alpha-1})$ com $a,b \in \Z$. Repetindo a conta anterior, temos 
+    \begin{align*}
+        2(x+ a2^{\alpha - 1})^2 - 219(y + b2^{\alpha-1})^2 + 1 &\equiv (2x^2 - 219y^2 + 1) + ax2^{\alpha + 1} + a^22^{2\alpha - 1} - 219yb2^{\alpha} - 219b^22^{2\alpha - 2}\\
+        &\equiv 2^\alpha(k - 219yb) \pmod{2^{\alpha + 1}}
+    \end{align*}
+    mas já estamos supondo $k$ ímpar e $y \equiv 1 \pmod 2$ pois $2x^2 - 219y^2 \equiv 1 \pmod 2$. Portanto $k - 219y \equiv 0 \pmod 2$ e tomando $b = 1$ temos solução.
+    
+    Agora moralmente terminamos, pois para $m = p^\alpha$ com $p$ primo sempre conseguimos solução e basta usar o Teorema Chinês dos Restos. Se
+    $m = p_1^{\alpha_1}p_2^{\alpha_2}\dots p_n^{\alpha_n}$ com os $p_j$ primos distintos, então, 
+    para cada $i$, encontramos solução
+    \[
+        2x_i^2 - 219y_i^2 \equiv -1 \pmod {p_i^{\alpha_i}}
+    \]
+    aplicando o TCM nos sistemas
+    \[
+        x \equiv x_i \pmod{p_i^{\alpha_i}} \quad \land \quad  y \equiv y_i \pmod{p_i^{\alpha_i}}  \quad \forall 1 \leq i \leq n
+    \]
+    encontramos $x \in \Z_m$ e $y \in \Z_m$ tal que 
+    \[
+        2x^2 - 219y^2 \equiv -1 \pmod m
+    \]
+    
+
 
     
 \end{proof}
