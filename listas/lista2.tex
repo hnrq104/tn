@@ -211,7 +211,82 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
     ou seja $\log q_n = \Theta(n^2)$, substituindo na fórmula de $\text{ord} \alpha$, vemos 
     \[
         \text{ord} \alpha = 2 + \limsup_{n \to \infty} \frac{\log a_{n+1}}{\log q_n} = 2 + \limsup_{n\to\infty} \frac{(n+1)\log 2}{\Theta(n^2)} = 2.
+    \]    
+\end{proof}
+
+\begin{problem}
+    Não sei fazer esse, contas muito feias.
+\end{problem}
+
+
+\begin{problem}
+    Prove que se $a$ e $b$ são inteiros positivos tais que $4ab - 1 \mid (4a^2 - 1)^2$, então 
+    $a = b$.
+\end{problem}
+
+\begin{proof}
+    Primeiramente, notamos que, sendo $(4ab - 1, b) = 1$, então
+    \begin{align*}
+        4ab - 1 \mid (4a^2 - 1)^2 &\iff 4ab - 1 \mid (4a^2 - 1)^2 \cdot b^2\\
+        &\iff 4ab - 1 \mid (4a^2b - b)^2\\
+        &\iff 4ab - 1 \mid (a - b)^2\\
+        &\iff \exists k \in \N, (a-b)^2 = (4ab-1)k
+    \end{align*}
+    e portanto o problema é simétrico em relação as variáveis $a,b$. Suponha, sem perda de generalidade, que existe solução $(a,b)$ com $a > b$ e $a$ mínimo.
+    Segue que existe $k \in \N$ tal que 
+    \begin{align*}
+        (a-b)^2 = (4ab-1)k \quad \text{ou seja} \quad a^2 - (2b + 4bk)a + b^2 + k = 0,
+    \end{align*}
+    note que $a$ é solução de $p(x) = x^2 - (2b + 4bk)x + b^2 + k = 0$. Sabemos que existe outra solução $a'$, tal que $p(a') = 0$ e 
+    \begin{enumerate}[label=(\roman*)]
+        \item $a'+a = 2b + 4bk$
+        \item $a'\cdot a = b^2 + k$
+    \end{enumerate}
+    Agora, segue de (i) que $a'\in \Z$ e segue de (ii) que $a' = \frac{b^2 + k}{a} > 0$, logo $a'\in \N$. Como $p(a') = 0$, segue que $(a',b)$ é solução também.
+    Sendo $k = (a-b)^2/(4ab - 1)$, segue que 
+    \[ 
+    a' = \frac{b^2 + \frac{(a-b)^2}{(4ab - 1)}}{a} < b + \frac{a^2}{3a^2} = b + \frac{1}{3}
     \]
+    portanto, $a' \leq b$. Agora, se $a'= b$, então, por (i) $b \mid a$ e por (ii) $b \mid k$, logo $(a/b, 1)$ é uma soulução menor o que é absurdo.
+    Se $a' < b$, temos que $(b, a')$ é uma solução menor e também temos absurdo.
+\end{proof}
+
+\begin{problem}
+    Demonstre que $2x^2 - 219y^2 = -1$ não tem soluções inteiras, mas $2x^2 - 219y^2 \equiv -1 \pmod m$ tem soluções para todo inteiro positivo $m$.
+\end{problem}
+
+\begin{proof}
+    Para a primeira parte, suponha que existe solução $(x_0,y_0) \in \N^2$ com $x_0$ mínimo. Seguindo a dica, notamos que 
+    $(x_1,y_1) = (|293x_0 - 3066y_0|, |-28x_0 + 293y_0|)$, pois 
+    \begin{align*}
+        2(293x_0 - 3066y_0)^2 - 219(-28x_0 + 293y_0)^2=&\\
+        [2(293)^2 - 219(28)^2] x_0^2 - [219(293)^2 - 2(3066)^2]y_0^2 &+ [219(2(28)(293)) - 2(2(293)(3066))]x_0y_0 =\\
+        2x_0^2 - 219y_0^2 = -1
+    \end{align*}
+    (óbviamente). Agora, segue de $x_0$ ser minimal que $x_0 \leq x_1$ e portanto, 
+    \[
+        x_0 \leq 293x_0 - 3066y_0 \quad \lor \quad x_0 \leq 3066y_0 - 293x_0
+    \]
+    que é equivalente a
+    \[
+        x_0 \geq \frac{3066}{292}y_0 \quad \lor \quad x_0 \leq \frac{3066}{294}y_0
+    \]
+    mas verificamos que para $2x_0^2 - 219y_0^2 = -1$, devemos ter
+    \[
+        x_0^2 - \frac{219}{2}y_0^2 + \frac{1}{2} = 0
+    \]
+    ou seja, como estamos tomando $x_0$ positivo,
+    \[
+        \sqrt{\frac{218}{2}}y_0 < x_0 = \sqrt{\frac{219y_0^2 - 1}{2}} < \sqrt{\frac{219}{2}} y_0
+    \]
+    mas, usando uma calculadora, 
+    \[
+     (10.42...)y_0= \frac{3066}{294}y_0 < 10.4402y_0 < \sqrt{\frac{218}{2}}y_0 < 
+     x_0 < \sqrt{\frac{219}{2}} y_0 < 10.4643 y_0 < \frac{3066}{292}y_0 = 10.5y_0
+    \]
+    absurdo.
+
+    Para a segunda parte, vamos tentar primeiramente módulo $p$.
 
     
 \end{proof}
