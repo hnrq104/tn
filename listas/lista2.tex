@@ -76,7 +76,12 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
     $(\frac{2}{p}) = 1$, logo $2^{(p-1)/2} \equiv 1 \pmod p$ e segue (da mesma forma que antes) que $t = 2^{n+1} \mid (p-1)/2$, ou seja 
     $p = k\cdot2^{n+2} + 1$.
 
-    Para a parte (c), usamos (b) e torcemos que achemos um fator rapidamente.
+    Para a parte (c), usamos (b) e torcemos que achemos um fator rapidamente. Fazendo as continhas vemos que $k = 5$ funciona. Isso é
+    \[
+        2^{2^5} + 1 = 4294967297 = 641 \cdot 6700417
+    \]
+    onde $641 = 5\cdot(2^7) + 1$. Essas contas foram feitas nesse \href{https://github.com/hnrq104/tn/blob/main/programinhas/square_and_multiply.py}{script}
+    que está no github.
 \end{proof}
 
 \begin{problem}
