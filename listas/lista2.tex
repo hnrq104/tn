@@ -220,9 +220,68 @@ Note que, se $a > 1$, a sequência $(x_k)$ é estritamente crescente já que $x_
 \end{proof}
 
 \begin{problem}
-    Não sei fazer esse, contas muito feias.
+    Seja $\alpha = [a_0; a_1, a_2 \dots] \in \R$. Prove que, se $q_n \leq q < q_{n+1}$, $(p,q) = 1$ e $p/q \neq p_n/q_n$ então vale $|p/q - \alpha| < 1/q^2$
+    se e somente se vale uma das seguintes condições:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\alpha_{n+1} \geq 2$, $p/q = (p_{n+1} - p_n)/(q_{n+1} - q_n)$ e $a_{n+1} + \beta_{n+1} - 2 < \alpha_{n+2}$ ou
+        \item $\alpha_{n+1} \geq 2$, $p/q = (p_{n} + p_{n-1})/(q_{n} + q_{n-1})$ e $(\alpha_{n+1} - 2)\beta_{n+1} < 1$. 
+    \end{enumerate}
 \end{problem}
 
+\begin{proof}
+    \textbf{RESOLUÇÃO INCOMPLETA.}
+    Vou fazer só a volta que envolve somente manipulações feias. Suponha que vale (i), notamos primeiramente que 
+    \[
+        pq_{n+1} - qp_{n+1} = p_{n+1}q_{n+1} - p_nq_{n+1} - q_{n+1}p_{n+1} + q_{n}p_{n+1} = q_{n}p_{n+1} - p_nq_{n+1} = (-1)^{n} 
+    \]
+    logo $(p,q) = 1$ e $p/q \neq p_n/q_n$. Temos também que 
+    \[
+        q_n \leq (a_{n+1} - 1)q_n \leq (a_{n+1} - 1)q_n + q_{n-1} = q = q_{n+1} - q_n < q_{n+1}
+    \]
+    já que $a_{n+1} \geq 2$. Para estimar o erro da aproximação, notamos 
+    \begin{align*}
+        \Big|\alpha - \frac{p}{q}\Big| &\leq \Big|\alpha - \frac{p_{n+1}}{q_{n+1}}\Big| + \Big|\frac{p_{n+1}}{q_{n+1}} - \frac{p}{q}\Big| = 
+        \frac{1}{(\alpha_{n+2} + \beta_{n+2})q_{n+1}^2} + \frac{|pq_{n+1} - qp_{n+1}|}{qq_{n+1}}\\
+        &= \frac{1}{(\alpha_{n+2} + \beta_{n+2})q_{n+1}^2} + \frac{1}{qq_{n+1}} = \frac{q + q_{n+1}(\alpha_{n+2} + \beta_{n+2})}{q(\alpha_{n+2} + \beta_{n+2})q_{n+1}^2}\\
+        &= \frac{q + q_{n+1}\alpha_{n+2} + q_n}{q(\alpha_{n+2} + \beta_{n+2})q_{n+1}^2} = \frac{\alpha_{n+2} + 1}{q(\alpha_{n+2} + \beta{n+2})q_{n+1}}
+    \end{align*}
+    agora, essa última expressão é menor que $1/q^2$ se e só se
+    \begin{align*}
+        \frac{\alpha_{n+2} + 1}{(\alpha_{n+2} + \beta_{n+2})q_{n+1}} &< \frac{1}{q}\\
+        q\alpha_{n+2} + q &< q_{n+1}\alpha_{n+2} + q_{n}\\
+        q_{n+1} &< q_{n}(\alpha_{n+2} + 2)\\
+        a_{n+1} + \beta_{n+1} &\leq \alpha_{n+2} + 2
+    \end{align*}
+    o que finaliza a primeira parte.
+
+    Agora vamos supor que vale (ii). Notamos que $q_n \leq q_n + q_{n-1} = q < a_{n+1}q_n + q_{n-1} = q_{n+1}$, pois $\a_{n+1} \geq 2$. Além disso, temos 
+    \[
+        \frac{p}{q} - \frac{p_n}{q_n} = \frac{p_nq_n + q_np_{n-1} - p_nq_n - q_{n-1}p_n}{qq_n} = \frac{(-1)^{n}}{qq_n}, 
+    \]
+    portanto, $(p,q) = 1$ (por causa do numerador) e $p/q \neq p_n/q_n$. É sabido que, sob essas condições, $p/q \not \in [p_n/q_n, p_{n+1}/q_{n+1}]$
+    e que para $n$ par, $p_n/q_n < \alpha \leq p_{n+1}/q_{n+1}$ e para $n$ ímpar vale a desigualdade oposta,  $p_{n+1}/q_{n+1} \leq \alpha < p_{n}/q_{n}$, a partir disso
+    e da equação anterior, temos que 
+    \[
+        p_n/q_n < \alpha < p/q \text{ se $n$ par} \quad \text{ e } \quad p/q < \alpha < p_n/q_n \text{ se $n$ ímpar.}
+    \]
+    De qualquer maneira, vale que 
+    \begin{align*}    
+        \Big| \alpha - \frac{p}{q} \Big| = \Big| \frac{p}{q} - \frac{p_n}{q_n} \Big| - \Big|\alpha - \frac{p_n}{q_n}\Big| &= \frac{1}{qq_n} - \frac{1}{(\alpha_{n+1} + \beta_{n+1})q_n^2}\\
+        &= \frac{q_n(\alpha_{n+1} + \beta_{n+1}) - q}{q(\alpha_{n+1} + \beta_{n+1})q_n^2} = \frac{q_n\alpha_{n+1} + q_{n-1} - q_{n} - q_{n-1}}{q(\alpha_{n+1} + \beta_{n+1})q_n^2}\\
+        &=  \frac{(\alpha_{n+1} - 1)}{q(\alpha_{n+1} + \beta_{n+1})q_n}
+    \end{align*}
+    então, para a afirmação, basta mostrar que sob nossas condições,
+    \[
+        \frac{\alpha_{n+1} - 1}{(\alpha_{n+1} + \beta_{n+1})q_n} < \frac{1}{q}
+    \]
+    \end{proof}
+    ou equivalentemente
+    \begin{align*}
+        q \alpha_{n+1} - q &< (\alpha_{n+1} + \beta_{n+1})q_n\\
+        q_{n-1}\alpha_{n+1} - q_{n} - q_{n-1} &< q_{n-1}\\
+        (\alpha_{n+1} - 2) &< \frac{q_n}{q_{n-1}} = \frac{1}{\beta_{n+1}}
+    \end{align*}
+    como queríamos mostrar.
 
 \begin{problem}
     Prove que se $a$ e $b$ são inteiros positivos tais que $4ab - 1 \mid (4a^2 - 1)^2$, então 
