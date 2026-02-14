@@ -1,0 +1,265 @@
+\pagebreak
+\section{Lista 3 - 09/02/2026}
+
+\begin{problem}
+    Uma pulseira é formada por pedras coloridas, de mesmo tamanho,
+    pregadas em volta de um círculo de modo a ficarem igualmente espaçadas.
+    Duas pulseiras são consideradas iguais se, e somente se, suas configurações
+    de pedras coincidem por uma rotação. Se há pedras disponíveis de $k \geq 1$ cores 
+    distintas, mostre que o número de pulseiras diferentes possíveis 
+    com $n$ pedras é dado pela expressão
+    \[
+    \frac{1}{n} \sum_{d\mid n} \varphi(d) \cdot k^{n/d}
+    \]
+\end{problem}
+
+Precisaremos de uma ferramenta famosa para contagens desse tipo.
+\begin{lemma}
+    (Burnside) Seja $G \curvearrowright X$ uma ação de um grupo finito $G$ sob um conjunto finito $X$. Dado $g \in G$,
+    denotamos $N(g) = \{ x \in X\;|\; g\cdot x = x\}$, i.e. os elementos fixados por $g$. Então vale a seguinte igualdade
+    \[
+        |X/G| = \frac{1}{|G|} \sum_{g \in G} |N(g)|.
+    \]
+\end{lemma}
+A prova desse lema envolve somente contagem e o teorema de Lagrange. Se necessário, provarei, ele em um apêndice.
+Agora podemos dar seguimento ao problema.
+
+\begin{proof}
+    (do Exercício) Conseguimos encaixar precisamente o contexto dado no problema nas condições do Lema. Definimos $X = [k]^n$
+    os vetores com $n$ entradas e coordenadas em $\{1,2 \dots k\}$ e seja $G$ o grupo das rotações das pulseiras, podemos tomar $G \cong (\Z_n, +)$.
+    Dada $r \in G$ rotação e $\vec{x} = (x[1], x[2], \dots x[n]) \in X$ vetor de pedras coloridas, definimos a ação
+    \[
+        (r\cdot \vec{x})[(i+r)] = x[i] 
+    \]
+    onde os índices são tomados módulo $n$. Por exemplo, se $n = 3$, $k = 3$, $\vec{x} = (1,2,3)$ e $r = \bar{2}$,
+    temos $r\cdot \vec{x} = (2,3,1)$, rodamos as entradas do vetor em duas posições para a direita.
+
+    Notamos que as classes em $|X/G|$ são exatamente as pulseiras em que estamos interessados em contar. Aplicando o lema, teriamos
+    \[
+        \#\{\text{pulseiras}\} = \frac{1}{n} \sum_{r \in \Z_n} \#\{\text{vetores fixados por  } r \}
+    \]
+    Então basta calcular quantos vetores são fixados por cada rotação $r \in Z_n$. Se $r \cdot x = x$, segue que para todo $i \in \Z_n$, $x[i+r] = x[i]$,
+    consequentemente, para todo $a \in \Z$ e portanto para todo $a \in \Z_n$
+    \[
+        x[i + ar] = x[i]
+    \]
+    onde novamente aqui as somas nos índices são tomadas módulo $n$. Isso é, se fixarmos a cor de $x[i]$, fixamos a cor de todos os índices
+    $\{i + ar \pmod n \;|\; a \in \Z_n\}$. Mas, se $d = (r,n)$, 
+    \[
+        |\{i + ar \pmod n \;|\; a \in \Z_n\}| = |\{ar \pmod n \;|\; a \in \Z_n\}| = \frac{n}{d}
+    \]
+    Portanto, fixando um elemento, determinamos $n/d$ outros. Como a pulseira tem $n$ elementos, podemos fazer $d$ escolhas entre as $k$ cores. Logo 
+    $|N(r)| = k^{d}$. Substituindo no Lema,
+    \[
+        \#\{\text{pulseiras}\} = \frac{1}{n} \sum_{r = 0}^{n-1} k^{(r,n)} = 
+        \frac{1}{n}\sum_{d|n}\varphi(d)k^{n/d}
+    \]
+    onde a última igualdade segue do fato que
+    \[
+        \sum_{i=0}^{n-1} k^{(r,n)} = \sum_{i=0}^{n-1} \sum_{d \mid n} \mathds{1}[d = (i,n)] k^{d} = 
+        \sum_{d \mid n} k^{d} \cdot \bigg(\sum_{i=0}^{n-1} \mathds{1}[(i,n) = d]\bigg) = \sum_{d \mid n} k^d \varphi(n/d)
+    \]
+\end{proof}
+
+\begin{problem}
+    Dadas duas funções $f,g : \N^* \to \C$, definimos a convolução de Dirichlet $f * g : \N^* \to \C$ de $f$ e $g$ por 
+    \begin{equation}
+        \label{l3:prob2:a}
+        f*g(n) := \sum_{d\mid n} f(d) g(n/d) = \sum_{d_1 d_2 = n} f(d_1)g(d_2)
+    \end{equation}
+\end{problem}
+\begin{enumerate}[label=(\alph*)]
+    \item Prove que, se $s \in \C$ e as séries $\sum_{n\geq 1} \frac{f(n)}{n^s}$ e $\sum_{n\geq 1}\frac{g(n)}{n^s}$ convergem
+    absolutamente, então
+    \[
+        \sum_{n\geq 1} \frac{f(n)}{n^s} \cdot \sum_{n\geq 1}\frac{g(n)}{n^s} = \sum_{n\geq 1}\frac{(f*g)(n)}{n^s}
+    \]
+
+    \begin{proof}
+        Como as séries convergem absolutamente, o produto converge absolutamente e podemos reordenar os índices de qualquer forma (contanto que apareçam todos).
+        Portanto, 
+        \[
+            \sum_{n\geq 1} \frac{f(n)}{n^s} \cdot \sum_{m\geq 1}\frac{g(m)}{n^s} = \sum_{n,m \geq 1} \frac{f(n)g(m)}{(nm)^s}
+            = \sum_{n\geq 1} \frac{1}{n^s} \cdot \bigg(\sum_{d_1 d_2 = n} f(d_1)g(d_2)\bigg) = \sum_{n\geq 1} \frac{(f*g)(n)}{n^s}.
+        \]
+    \end{proof}
+
+
+    \item Prove que para quaisquer funções $f,g,h : \N^* \to \C$, temos $f*g = g*f$ e $f*(g*h) = (f*g)*h$ (comutatividade e associatividade), e 
+    que a função $I : \N^* \to \C$ dada por
+    \[
+        I(n) = \begin{cases}
+            1\quad \text{se } n = 1\\
+            0\quad \text{se } n > 1
+        \end{cases}
+    \]
+    é o elemento neutro da operação $*$.
+
+    \begin{proof}
+        A comutatividade segue diretamente da involução nos índices $d \to n/d$, segue que 
+        \[
+            f*g(n) = \sum_{d\mid n} f(d) g(n/d) = \sum_{d' \mid n} f(n/d')g(d') = g*f(n).
+        \]
+
+        Associatividade é vista melhor da segunda forma, 
+        \[
+        f*(g*h)(n) = \sum_{d_1x = n} f(d_1) (g*h)(x) = \sum_{d_1x = n} \sum_{d_2 d_3 = x} f(d_1) g(d_2) h(d_3) =  \sum_{d_1 d_2 d_3 = n} f(d_1) g(d_2) h(d_3)
+        \]
+        da mesma forma, 
+        \[
+            (f*g)*h(n) = \sum_{x d_3 = n} (f*g)(x)g(d_3) = \sum_{xd_3 = n} \sum_{d_1 d_2 = x} f(d_1) g(d_2) h(d_3) =  \sum_{d_1 d_2 d_3 = n} f(d_1) g(d_2) h(d_3)
+        \]
+
+        Por fim, para todo $n \in \N^*$,
+        \[
+            (I*f)(n) = \sum_{d \mid n} I(d)f(n/d) = f(n)
+        \]
+        logo, $I*f = f$.
+    \end{proof}
+
+    \item Prove que se $f$ e $g$ são multiplicativas, então $f*g$ é multiplicativa.
+    \begin{proof}
+        Sejam $n,m \in \N^*$ com $(n,m) = 1$, então $(f*g)(nm) = \sum_{dd' = nm}f(d)g(d')$. Escrevendo $d = (d,n)\cdot(d,m) = d_n d_m$
+        e $d' = (d',n)(d',m) = d_n'd_m'$, como $dd'= nm$, devemos ter que $(d_n,d_m) = (d_n', d_m') = 1$,  $d_nd_n' = n$ e $d_md_m'=m$. Logo,
+        \begin{align*}
+            (f*g)(nm) &= \sum_{\substack{(d_n d_n' = n) \\ (d_m d_m' = m)}} f(d_nd_m)g(d_n'd_m') = \sum_{\substack{(d_n d_n' = n) \\ (d_m d_m' = m)}} f(d_n)f(d_m)g(d_n')g(d_m')\\
+            &= \bigg(\sum_{(d_n d_n' = n)} f(d_n)g(d_n')\bigg) \bigg(\sum_{(d_m d_m' = m)} f(d_m)g(d_m')\bigg) = (f*g)(n) \cdot (f*g)(m) 
+        \end{align*}
+    \end{proof}
+
+    \item Prove que, se $f : \N^* \to \C$ é tal que $f(1) \neq 0$, então existe uma única função $g : \N^* \to \C$ tal que $f*g = I$, 
+    a qual é dada recursivamente por $g(1) = 1/f(1)$ e, para $n>1$
+    \[
+        g(n) = \frac{-1}{f(1)} \sum_{d \mid n, d\neq n} f(n/d)g(d).
+    \]
+    \begin{proof}
+        A condição $(f*g)(1) = I(1) = 1$ determina únicamente que $g(1) = 1/f(1)$. Para $n > 1$, basta notar que deveríamos ter
+        \[
+            0 = I(n) = (f*g)(n) = \sum_{d \mid n} g(d) f(n/d) \iff f(1)g(n) = - \sum_{d\mid n, d\neq n} f(n/d)g(d)
+        \]
+        o que implica a fórmula.
+    \end{proof}
+
+    \item Prove que, se $f$ é multiplicativa então a função $f^{(-1)} = g$ definida no item anterior é multiplicativa.
+    \begin{proof}
+        Primeiramente, como $f$ é multiplicativa, $f(1) = 1 = g(1)$ (não pode ser $0$ senão não teria inversa). Vamos provar por indução em $n$ que 
+        para todo $ab = n$ com $(a,b) = 1$, vale $g(n) = g(a)g(b)$ e portanto que $g$ é multiplicativa. O resultado segue para $n = 1$, suponha 
+        que vale para todo $m < n$ e seja $n = ab$ com $(a,b) = 1$. Segue que
+        \begin{align}
+            g(ab) = - \sum_{\substack{d | ab\\d\neq ab}} g(d)f(ab/d) &= - \sum_{\substack{d_a | a, d_b \mid b\\ d_ad_b \neq ab}} g(d_a d_b)f\big(\frac{ab}{d_a d_b}\big)\\
+            &= - \sum_{\substack{d_a | a, d_b \mid b\\ d_ad_b \neq ab}} g(d_a) g(d_b)f\big(\frac{a}{d_a}\big)f\big(\frac{b}{d_b}\big)\\
+            \label{l3:eq:inversa_dirichlet}
+            &= - \bigg[ \bigg(\sum_{d_a \mid a} g(d_a)f(a/d_a)\bigg)\bigg(\sum_{d_a \mid a} g(d_a)f(a/d_a)\bigg) - g(a)f(1)g(b)f(1)\bigg]
+        \end{align}
+        Agora, segue da fórmula do item anterior que
+        \begin{align*}
+            \sum_{d_a \mid a} g(d_a)f(a/d_a) = g(a)f(1) + \sum_{d_a \mid a, d_a \neq a} g(d_a)f(a/d_a) = g(a)f(1) - f(1)g(a) = 0,
+        \end{align*}
+        portanto [\ref{l3:eq:inversa_dirichlet}] se torna
+        \[
+            -[0 - g(a)g(b)f(1)^2] = g(a)g(b)
+        \]
+        pois $f(1) = 1$.
+    \end{proof}
+\end{enumerate}
+
+\begin{problem}
+    Prove que, se $\alpha > 2$, então
+    \[
+        \sum_{n=1}^{\infty} \frac{\varphi(n)}{n^\alpha} = \sum_{n=1}^{\infty} \frac{1}{n^{\alpha-1}} \bigg/ \sum_{n=1}^{\infty} \frac{1}{n^{\alpha}}.
+    \]
+\end{problem}
+\begin{proof}
+    Como $\alpha > 2$ e $1 \leq \varphi(n) \leq n$, todos os somatórios são absolutamente convergentes. Basta mostrar que
+    \[
+        \bigg(\sum_{n=1}^{\infty} \frac{\varphi(n)}{n^\alpha}\bigg)\bigg(\sum_{n=1}^{\infty} \frac{1}{n^{\alpha}}\bigg) = \sum_{n=1}^{\infty} \frac{1}{n^{\alpha - 1}}.
+    \]
+    Mas usando a equação [\ref{l3:prob2:a}] de (3.a) com $f(n) = \varphi(n)$ e $g(n) = 1$, temos 
+    \begin{align*}
+        \bigg(\sum_{n=1}^{\infty} \frac{\varphi(n)}{n^\alpha}\bigg)\bigg(\sum_{n=1}^{\infty} \frac{1}{n^{\alpha}}\bigg) &= \sum_{n=1}^{\infty} \frac{(f*g)(n)}{n^\alpha} =\\
+        = \sum_{n=1}^{\infty} \frac{1}{n^\alpha} \sum_{d \mid n} \varphi(d) &= \sum_{n=1}^{\infty} \frac{n}{n^\alpha} = \sum_{n=1}^{\infty} \frac{1}{n^{\alpha -1 }}
+    \end{align*}
+    onde usamos o fato de que para todo $n \in \N^*$, vale que 
+    \[
+        \sum_{d \mid n} \varphi(d) = n.
+    \]
+    Uma forma fácil de ver isso é checando
+    \[
+        n = \sum_{i = 1}^{n} \sum_{d \mid n} \mathds{1}[(i,n) = d] = \sum_{d \mid n} \sum_{i=1}^{n} \mathds{1}[(i,n) = d]
+    \]
+    mas $(i,n) = d \iff (d\mid i)$ e $(i/d, n/d) = 1$, como há $\varphi(n/d)$ elementos em $\{1, \dots, n/d - 1\}$ primos 
+    com $n/d$, temos 
+    \[
+        \sum_{i=1}^{n} \mathds{1}[(i,n) = d] = \varphi(n/d)
+    \]
+    e portanto
+    \[
+        \sum_{d \mid n} \sum_{i=1}^{n} \mathds{1}[(i,n) = d] = \sum_{d \mid n} \varphi(n/d) = \sum_{d \mid n} \varphi(d).
+    \]
+\end{proof}
+
+\begin{problem}
+    Mostre que o conjunto
+    \[
+        \bigg\{ \frac{\varphi(n)}{n} \;\bigg|\; n \in \N^* \bigg\}
+    \]
+    é denso em $[0,1]$.
+\end{problem}
+
+Precisaremos de um Lema fácil.
+\begin{lemma}
+    Seja $\sum_{n=1}^{\infty} a_n = \infty$ uma série divergente de termos positivos com 
+    $a_n \to 0$, então o conjunto 
+    \[
+        M = \bigg\{ \sum_{n \in A} a_n \mid A \subset \N, |A| < \infty \bigg\}
+    \]
+    é denso em $\R^+$.
+\end{lemma}
+\begin{proof}
+    Dados quaisquer $x \in \R^+$ e $\eps > 0$, queremos encontrar um ponto de $M$ em $(x-\eps, x+\eps)$. Como $a_n \to 0$,
+    existe $N$ tal que $\forall m \geq N$, $a_m < \min(\eps, x)$. Como $a_N < x$, $\sum_{n\geq N} a_n = \infty$ e os $a_n$ são positivos, 
+    segue que existe um índice mínimo $j > N$ tal que
+    \[
+        x + \eps < \sum_{n = N}^{j+1} a_n
+    \]
+    e portanto, 
+    \[
+        x + \eps > \sum_{n = N}^{j} a_n = \bigg(\sum_{n = N}^{j+1} a_n\bigg) - a_{j+1} \geq (x+\eps) - \eps = x
+    \]
+    ou seja, se $A = \{n \;|\; N \leq n \leq j\}$, segue que $\sum_{n \in A} a_n \in (x-\eps, x+\eps)$.
+\end{proof}
+
+Agora podemos dar seguimento à solução do problema.
+\begin{proof}
+    (Do exercício) Escrevendo
+    \[
+       \frac{\varphi(n)}{n} = \prod_{p \mid n}\bigg(1 - \frac{1}{p}\bigg)
+    \]
+    com os $p$ primos. Vemos que o problema se resume a determinar se o conjunto 
+    \[
+        S = \bigg\{ \prod_{p \in A}\big(1 - \frac{1}{p}\big) \; \mid \; A \text{ conjunto finito de primos }\bigg\}
+    \]
+    é denso em $[0,1]$. Tomando $-\log$ (que é uma função contínua) em $S$, é equivalente também a verificar que
+    \[
+        -\log(S) = \bigg\{\sum_{p \in A} - \log(1 - \frac{1}{p}) \; \mid \; A \text{ conjunto finito de primos }\bigg\}
+    \]
+    é denso em $\R^+$. Mas, lembrando que $x - x^2/2\leq \log(1 + x) \leq x$ para $x > 1$, segue que
+    \[
+    \sum_{p_n \text{ primo}}-\log(1 - \frac{1}{p_n}) \geq \sum_{p_n \text{ primo}} \frac{1}{p_n} = \infty
+    \]
+    e que $0 < -\log(1 - \frac{1}{p_n}) < \frac{1}{p_n} + \frac{1}{2p_n^2} \to 0$ quando $n \to \infty$. Portanto, pelo Lema anterior,
+    $-\log(S)$ é denso em $\R^+$, logo $S$ é denso em $(0,1)$ e por consequência em $[0,1]$.
+\end{proof}
+
+\begin{problem}
+    Seja $f : \N \to [0,\infty)$ uma função decrescente. Prove que a série
+    \[
+        \sum_{p \text{ primo}} f(p)
+    \]
+    converge se, e somente se, a série
+    \[
+        \sum_{n = 2} \frac{f(n)}{\log(n)}
+    \]
+    converge. Em particular, mostre que $\sum_{p \text{ primo}} 1/p = +\infty$, mas $\sum_{p \text{ primo}} 1/(p\log(p)) < \infty$ converge.
+\end{problem}
+
