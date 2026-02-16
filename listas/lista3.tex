@@ -56,9 +56,13 @@ Agora podemos dar seguimento ao problema.
     \]
     onde a última igualdade segue do fato que
     \[
-        \sum_{i=0}^{n-1} k^{(r,n)} = \sum_{i=0}^{n-1} \sum_{d \mid n} \mathds{1}[d = (i,n)] k^{d} = 
-        \sum_{d \mid n} k^{d} \cdot \bigg(\sum_{i=0}^{n-1} \mathds{1}[(i,n) = d]\bigg) = \sum_{d \mid n} k^d \varphi(n/d)
+        \sum_{i=1}^{n} k^{(r,n)} = \sum_{i=1}^{n} \sum_{d \mid n} \mathds{1}[d = (i,n)] k^{d} = 
+        \sum_{d \mid n} k^{d} \cdot \bigg(\sum_{i=1}^{n} \mathds{1}[(i,n) = d]\bigg) = \sum_{d \mid n} k^d \varphi(n/d)
     \]
+\end{proof}
+
+\begin{proof}
+    (Segunda prova mais fácil)
 \end{proof}
 
 \begin{problem}
@@ -183,19 +187,19 @@ Agora podemos dar seguimento ao problema.
     \[
         \sum_{d \mid n} \varphi(d) = n.
     \]
-    Uma forma fácil de ver isso é checando
-    \[
-        n = \sum_{i = 1}^{n} \sum_{d \mid n} \mathds{1}[(i,n) = d] = \sum_{d \mid n} \sum_{i=1}^{n} \mathds{1}[(i,n) = d]
-    \]
-    mas $(i,n) = d \iff (d\mid i)$ e $(i/d, n/d) = 1$, como há $\varphi(n/d)$ elementos em $\{1, \dots, n/d - 1\}$ primos 
-    com $n/d$, temos 
-    \[
-        \sum_{i=1}^{n} \mathds{1}[(i,n) = d] = \varphi(n/d)
-    \]
-    e portanto
-    \[
-        \sum_{d \mid n} \sum_{i=1}^{n} \mathds{1}[(i,n) = d] = \sum_{d \mid n} \varphi(n/d) = \sum_{d \mid n} \varphi(d).
-    \]
+    % Uma forma fácil de ver isso é checando
+    % \[
+    %     n = \sum_{i = 1}^{n} \sum_{d \mid n} \mathds{1}[(i,n) = d] = \sum_{d \mid n} \sum_{i=1}^{n} \mathds{1}[(i,n) = d]
+    % \]
+    % mas $(i,n) = d \iff (d\mid i)$ e $(i/d, n/d) = 1$, como há $\varphi(n/d)$ elementos em $\{1, \dots, n/d - 1\}$ primos 
+    % com $n/d$, temos 
+    % \[
+    %     \sum_{i=1}^{n} \mathds{1}[(i,n) = d] = \varphi(n/d)
+    % \]
+    % e portanto
+    % \[
+    %     \sum_{d \mid n} \sum_{i=1}^{n} \mathds{1}[(i,n) = d] = \sum_{d \mid n} \varphi(n/d) = \sum_{d \mid n} \varphi(d).
+    % \]
 \end{proof}
 
 \begin{problem}
@@ -213,10 +217,10 @@ Precisaremos de um Lema fácil.
     \[
         M = \bigg\{ \sum_{n \in A} a_n \mid A \subset \N, |A| < \infty \bigg\}
     \]
-    é denso em $\R^+$.
+    é denso em $(0,\infty)$ e portanto em $[0,\infty)$.
 \end{lemma}
 \begin{proof}
-    Dados quaisquer $x \in \R^+$ e $\eps > 0$, queremos encontrar um ponto de $M$ em $(x-\eps, x+\eps)$. Como $a_n \to 0$,
+    Dados quaisquer $x > 0$ e $\eps > 0$, queremos encontrar um ponto de $M$ em $(x-\eps, x+\eps)$. Como $a_n \to 0$,
     existe $N$ tal que $\forall m \geq N$, $a_m < \min(\eps, x)$. Como $a_N < x$, $\sum_{n\geq N} a_n = \infty$ e os $a_n$ são positivos, 
     segue que existe um índice mínimo $j > N$ tal que
     \[
@@ -248,7 +252,7 @@ Agora podemos dar seguimento à solução do problema.
     \sum_{p_n \text{ primo}}-\log(1 - \frac{1}{p_n}) \geq \sum_{p_n \text{ primo}} \frac{1}{p_n} = \infty
     \]
     e que $0 < -\log(1 - \frac{1}{p_n}) < \frac{1}{p_n} + \frac{1}{2p_n^2} \to 0$ quando $n \to \infty$. Portanto, pelo Lema anterior,
-    $-\log(S)$ é denso em $\R^+$, logo $S$ é denso em $(0,1)$ e por consequência em $[0,1]$.
+    $-\log(S)$ é denso em $[0, \infty)$, logo $S$ é denso em $(0,1)$ e por consequência em $[0,1]$.
 \end{proof}
 
 \begin{problem}
@@ -262,4 +266,131 @@ Agora podemos dar seguimento à solução do problema.
     \]
     converge. Em particular, mostre que $\sum_{p \text{ primo}} 1/p = +\infty$, mas $\sum_{p \text{ primo}} 1/(p\log(p)) < \infty$ converge.
 \end{problem}
+
+Tem um leminha útil para esse problema.
+
+\begin{lemma}
+    Seja $f : [0,\infty) \to [0,\infty)$ uma função decrescente. Para toda constante $C > 0$, $\sum_{n\geq0}f(n) < \infty$ se, e somente se,
+    $\sum_{n\geq0}f(Cn) < \infty$.
+\end{lemma}
+
+
+\begin{proof}
+    Basta mostrar a ida, pois a recíproca é equivalente tomando $g(n) = f(Cn)$. Se $C \geq 1$, $f(n) \geq f(Cn)$ e
+    \[
+    \sum_{n\geq0}f(Cn) < \sum_{n\geq0}f(n) < \infty.
+    \]  
+    Se $0 < C < 1$, tome $M \in \N$ tal que $1/M \leq C$, vale que 
+    \[
+        \sum_{n = 0}^{\infty} f(Cn) \leq \sum_{n=0}^{\infty} f\bigg(\frac{n}{M}\bigg) = 
+        \sum_{k = 0}^{\infty} \sum_{n = kM}^{(k+1)M - 1} f\bigg(\frac{n}{M}\bigg) \leq \sum_{k = 0}^{\infty} Mf(k) < \infty.
+    \]    
+\end{proof}
+
+
+\begin{proof}
+    (Do exercício) Pelo Teorema de Chebyshev, existem constantes $0 < A < B$ tal que, se $p_n$ é o $n$-ésimo primo, vale que 
+    \[
+        An\log n < p_n < B n\log n, 
+    \]
+    portanto, se $\sum_{p_n} f(p_n) < \infty$, segue que 
+    \[
+        \sum_{n \geq 1} f(Bn\log n) \leq \sum_{n \geq 1} f(p_n) < \infty.
+    \]
+    Pelo lema anterior, chamando $g(n) = f(Bn\log n)$, segue que para todo $C > 0$, $\sum_{n \geq 1} g(Cn) < \infty$.
+    Em particular, tomando $C < \frac{A}{B}$, segue que para $M$ grande o suficiente, se $n \geq M$, então $An\log n > CBn\log(Cn)$
+    e portanto,
+    \[
+        \sum_{n \geq M} f(A n\log n) \leq \sum_{n \geq M} f(CBn\log(n) + n\log(C/B)) \leq \sum_{n \geq 1} g(Cn) < \infty.
+    \]
+    Na verdade, trocando $A$ por qualquer constante positiva $D$, provamos que $\sum_{n \geq 1} f(Dn\log n) < \infty$. Portanto,
+    \[
+        \sum_{p_n} f(p_n) < \infty \quad \iff\quad \sum_{n \geq 1} f(n\log n) < \infty.
+    \]
+    Vamos mostrar que $\sum_{n \geq 1} f(n\log n) < \infty$ se, e somente se, $\sum_{n \geq 2} f(n)/\log n < \infty$. Chamando $w(n) = n\log(n)$,
+    podemos escrever
+    \[
+        \sum_{n=2}^{\infty} \frac{f(n)}{\log(n)} = C + \sum_{n=3}^{\infty} \sum_{m = \floor{w(n)}}^{\floor{w(n+1)} - 1}\frac{f(m)}{\log(m)}
+    \]
+    para algum $C > 0$ que lida com os primeiros termos omitidos. Note que
+    \[
+        w(n+1) - w(n) = (n+1)\log(n+1) - n\log(n) = \Theta(\log(n))
+    \]
+    e \[
+        \log(w(n)) = \log(n\log(n)) = \log(n) + \log\log(n) = \Theta(\log(n)).
+    \]
+    Segue que
+    \[
+        \sum_{n=3}^{\infty} \sum_{m = \floor{w(n)}}^{\floor{w(n+1)} - 1}\frac{f(m)}{\log(m)} \leq \sum_{n = 3}^{\infty} (w(n+1) - w(n))\frac{f(w(n))}{\log(w(n))} = \sum_{n = 3}^{\infty} \Theta(f(w(n))) < \infty
+    \]
+    portanto $\sum_{n \geq 1} f(w(n)) < \infty$ implica $\sum_{n \geq 2} f(n)/\log(n) < \infty$ e da mesma forma,
+    \[
+        \sum_{n=3}^{\infty} \sum_{m = \floor{w(n)}}^{\floor{w(n+1)} - 1}\frac{f(m)}{\log(m)} \geq \sum_{n = 3}^{\infty} (w(n+1) - w(n) - 1)\frac{f(w(n+1))}{\log(w(n+1))} = \sum_{n = 3}^{\infty} \Theta(f(w(n))) 
+    \]
+    e temos a volta, $\sum_{n \geq 2} f(n)/\log(n) < \infty \Rightarrow \sum_{n \geq 1} f(w(n)) < \infty$.
+
+    Para a segunda parte da questão, basta verificar que 
+    \[
+        \sum_{n \geq 2} \frac{1}{n\log n} = \infty \quad \text{e} \quad \sum_{n \geq 2} \frac{1}{n(\log n)^2} < \infty
+    \]
+    mas segue do fato que 
+    \[
+        \sum_{n \geq 2}^{N} \frac{1}{n\log n} = \int_2^{N} \frac{dx}{x\log x}  + O(1) = \log \log N + O(1) \to \infty.
+    \]
+    Similarmente,
+    \[
+        \sum_{n \geq 2}^{\infty} \frac{1}{n(\log n)^2} = \int_2^{\infty} \frac{dx}{x(\log x)^2} + O(1) 
+    \]
+    fazendo a substituição $u = \log x$, $du = \frac{dx}{x}$, segue
+    \[
+        \int_2^{\infty} \frac{dx}{x(\log x)^2} + O(1) = \int_{\log(2)}^\infty \frac{du}{u^2} + O(1) < \infty
+    \]
+    como queriámos mostrar.
+\end{proof}
+
+\begin{problem}
+    Um número de Sierpinski é um número natural ímpar $k$ tal que $2^n\cdot k + 1$ é composto para todo natural $n$. Prove que 
+    78557 é um número de Sierpinski, e que existem infinitos números de Sierpinski a partir das congruências
+    \begin{align*}
+        78557\cdot2^0 + 1 \equiv 0 \pmod 3\\
+        78557\cdot2^1 + 1 \equiv 0 \pmod 5\\
+        78557\cdot2^7 + 1 \equiv 0 \pmod 7\\
+        78557\cdot2^{11} + 1 \equiv 0 \pmod {13}\\
+        78557\cdot2^3 + 1 \equiv 78557\cdot2^{39} + 1 \equiv 0 \pmod {73}\\
+        78557\cdot2^{15} + 1 \equiv 0 \pmod {19}\\
+        78557\cdot2^{27} + 1 \equiv 0 \pmod {37}.
+    \end{align*}
+\end{problem}
+
+\begin{proof}
+    Seja $k \in \N$, vamos mostrar que se $k$ é um ímpar suficientemente grande que satisfaz as mesmas recorrências que $78557$, então $k$ é de Sierpinski. 
+
+    Suponha que $k\cdot 2^n + 1$ é primo e $k > 73$, segue que $k\cdot 2^n + 1 \not \in \{3,5,7,13,73,19,37\}$ e
+    se $k\cdot2^n + 1 \equiv 0$ módulo qualquer um desses primos, $k\cdot 2^n + 1$ seria composto.  
+
+    Como $2^2 \equiv 1 \pmod 3$, se $n \equiv 0 \pmod 2$, então 
+    $k\cdot 2^n + 1 \equiv k\cdot 1 + 1 \equiv 0 \pmod 3$. Logo podemos supor que $n \equiv 1 \pmod 2$.
+
+    Como $2^4 \equiv 1 \pmod 5$, então se $n \equiv 1 \pmod 4$, segue que $k\cdot 2^n + 1 \equiv k\cdot 2^1 + 1 \equiv 0 \pmod 5$. Podemos 
+    supor que $n \equiv 3 \pmod 4$.
+
+    De $2^3 \equiv 1 \pmod 7$, segue que se $n \equiv 1 \pmod 3$, então $k\cdot 2^{n} + 1 \equiv k\cdot 2 + 1 \equiv k\cdot 2^7 + 1 \equiv 0 \pmod 7$.
+    Portanto, temos que $n \equiv \{0,2\} \pmod 3$. O que, junto com anterior, implica que $n \equiv \{3, 11\} \pmod {12}$.
+
+
+    Como $2^{12} \equiv 1 \pmod {13}$, se $n \equiv 11 \pmod {12}$, então $k\cdot 2^n + 1 \equiv k\cdot2^{11} + 1 \equiv 0 \pmod {13}$, logo 
+    podemos supor $n \equiv 3 \pmod {12}$.
+
+
+    De $78557\cdot2^3 + 1 \equiv 78557\cdot2^{39} + 1\pmod {73}$ e $(78557,73) = 1$, segue que $2^{36} \equiv 1 \pmod {73}$ e, 
+    portanto, se $n \equiv 3 \pmod {36}$, então $k\cdot 2^n + 1 \equiv k\cdot 2^{3} + 1 \equiv 0 \pmod {73}$. Ou seja, podemos supor $n \equiv \{15, 27\} \pmod {36}$.
+
+    Como $2^{18} \equiv 1 \pmod {19}$, então se $n \equiv {15} \pmod 18$, temos $k\cdot 2^{n} + 1 \equiv k\cdot 2^{15} + 1 \equiv 0 \pmod {19}$.
+    Ou seja, $n \not \equiv 15 \pmod {36}$ e devemos ter que $n \equiv 27 \pmod {36}$.
+
+    De $2^{36} \equiv 1 \pmod {37}$, se $n \equiv 27 \pmod {36}$, então $k\cdot 2^{n} + 1 \equiv k\cdot 2^{27} + 1 \equiv 0 \pmod {37}$. Mas isso é absurdo,
+    já tinhamos restringido $n$ para $27 \pmod {36}$.
+
+    Tomando $k \equiv 1 \pmod 2$, forçamos $k$ a ser ímpar, pelo TCM, existem infinitas soluções para $k > 73$, todas elas de Sierpinski (inclusive 78557). 
+\end{proof}
 
